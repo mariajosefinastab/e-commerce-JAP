@@ -1,16 +1,20 @@
 document.getElementById ("loginForm").addEventListener("submit",function(event) {
 event.preventDefault ();
-let email = document.getElementById("email").value.trim();
-let passsword = document.getElementById("passowrd").value.trim();
 
-if (email =="" || passsword =="" ) {
-    alert("email o password vacios,favor complete");
+let email = document.getElementById("email");
+let passsword = document.getElementById("password");
+
+if (email.value.trim() =="" ) {
+    email.classList.add("is-invalid");
 }
+else if (passsword.value.trim()==""){
+passsword.classList.add("is-invalid");
+}
+
 else {
     window.location.href = "products.html";
 }
 
-})
+});
 
-;
 
