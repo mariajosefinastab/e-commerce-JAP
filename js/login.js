@@ -13,7 +13,7 @@ if (email.value.trim() === "") {
     
     //Desafiate!
 
-    localStorage.setItem("authenticate", "true");
+    localStorage.setItem("authenticated", "true");
     window.location.href = "products.html";
 }
 
