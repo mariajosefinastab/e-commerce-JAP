@@ -10,21 +10,15 @@ if (email.value.trim() === "") {
 }else if (passsword.value.trim() === ""){
     passsword.classList.add("is-invalid");
 } else {
+    
     //Desafiate!
-    localStorage.setItem("authenticate", "true");
+
+    localStorage.setItem("authenticated", "true");
     window.location.href = "products.html";
 }
 
 });
 
-/*
-soy un comentario!
-_O_|___|_O_   
-___|_x_|___
- x |   | O
- 
-
-*/
 
 
 
