@@ -188,3 +188,8 @@ a.custom-card:hover {
 .checked {
   color: orange;
 }
+
+#user-email {
+  color: orangered;
+  font-size: 30px;
+}

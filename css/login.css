@@ -228,7 +228,7 @@ footer p {
     }}
 
 
-/* Media query para vertical 768x1024 px*/ /*HECHO*/
+/* Media query para vertical 768x1024 px*/ /*HECHO*/ /*Copia este 480px y 768px */
 @media (min-width: 768px) and (max-width: 1024px) {
     .containerForm {
         padding: 30px;
@@ -289,7 +289,7 @@ footer p {
 
     .form-group label {
         font-size: 15px;
-        padding-left: 0;
+        padding-left: 5px;
     }
 
     .form-group input {
@@ -306,7 +306,7 @@ footer p {
         /*margin-right: 130px;*/
         margin-bottom: 20px;
     }
-    
+
 
     footer {
         height: auto;
@@ -319,7 +319,8 @@ footer p {
 /* Media query para pantallas entre 480px y 768px */
 @media (min-width: 481px) and (max-width: 767px) {
     .containerForm {
-        padding: 20px;
+        /*padding: 20px;*/
+        width: 400px;
     }
 
     .login {
@@ -331,6 +332,7 @@ footer p {
         font-size: 26px;
         margin-top: 30px;
     }
+    
 
     .form-group label {
         font-size: 20px;

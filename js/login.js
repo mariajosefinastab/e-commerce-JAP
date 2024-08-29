@@ -1,22 +1,28 @@
-document.getElementById ("loginForm").addEventListener("submit",function(event) {
-event.preventDefault ();
+document.addEventListener("DOMContentLoaded", function() {
 
-let email = document.getElementById("email");
-let passsword = document.getElementById("password");
+        document.getElementById ("loginForm").addEventListener("submit",function(event) {
+        event.preventDefault ();
 
-if (email.value.trim() === "") {
-    email.classList.add("is-invalid");
+        let email = document.getElementById("email");
+        let password = document.getElementById("password");
 
-}else if (passsword.value.trim() === ""){
-    passsword.classList.add("is-invalid");
-} else {
-    
-    //Desafiate!
+         // Limpiar las clases de error antes de la validación
+         email.classList.remove("is-invalid");
+         password.classList.remove("is-invalid");
 
-    localStorage.setItem("authenticated", "true");
-    window.location.href = "products.html";
-}
+        if (email.value.trim() === "") {
+            email.classList.add("is-invalid");
 
+        }else if (password.value.trim() === ""){
+            password.classList.add("is-invalid");
+        } else {
+            //Desafiate!
+            localStorage.setItem("authenticated", "true");
+            localStorage.setItem("email", email.value.trim()); 
+            window.location.href = "products.html";
+        }
+
+    });
 });
 
 
