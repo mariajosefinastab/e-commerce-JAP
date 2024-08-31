@@ -1,3 +1,45 @@
 .productImg{
     height: 200px;
 }
+
+/* Tamaño estándar es el diseño por defecto*/
+/* Media query para pantallas entre 768px y 1024px */
+@media (min-width: 768px) and (max-width:1365px) {
+
+    .productImg{
+        height: 150px;
+    }
+    .unidades{
+        display: none !important;
+    }
+    .descripcion{
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+    }
+    .info{
+        flex: 0 0 auto !important;
+        width: 33.33333333% !important;
+    }
+}
+/* Media query para pantallas entre 320px y 568px */
+@media (max-width: 767px) {
+    
+    
+
+    .containerForm {
+        width: 200px;
+        float: center;
+    }
+    .unidades,.descripcion,.price {
+        display: none;
+    }
+    .fila {
+        display: block;
+        
+        
+    }
+    .precio {
+        text-align: left;
+    }
+}

@@ -117,8 +117,15 @@ footer p {
 /*--------------------------------------------------------------------------------------------------------------------------------------------------*/
 
 /* Estilos para pantallas 1366x768 px */
+/*
+Estandar: 1366 x 768
+tablet: 768 x 1024
+paqueño: 320 x 568
 
-@media (min-width: 768px) and (max-width: 1366px){
+*/
+
+/*Estandar*/
+@media (min-width: 1366px) {
     .containerForm {
         padding: 44px;
         display: flex;
@@ -225,11 +232,11 @@ footer p {
     
     .container > p:last-child {
         order: 1;
-    }}
+    }
+}
 
-
-/* Media query para vertical 768x1024 px*/ /*HECHO*/ /*Copia este 480px y 768px */
-@media (min-width: 768px) and (max-width: 1024px) {
+/* Media query para vertical 768x1024 px*/
+@media (min-width: 768px) and (max-width: 1365px) {
     .containerForm {
         padding: 30px;
         width: 600px;
@@ -271,7 +278,7 @@ footer p {
 }
 
 /* Media query para 320x568 px*/ /*HECHO*/
-@media (max-width: 480px) {
+@media (max-width: 767px){
     .containerForm {
         padding: 10px;
         width: 280px;
@@ -315,45 +322,3 @@ footer p {
         font-size: 13px;
     }
 }
-
-/* Media query para pantallas entre 480px y 768px */
-@media (min-width: 481px) and (max-width: 767px) {
-    .containerForm {
-        /*padding: 20px;*/
-        width: 400px;
-    }
-
-    .login {
-        width: 90%;
-        height: auto;
-    }
-
-    h2 {
-        font-size: 26px;
-        margin-top: 30px;
-    }
-    
-
-    .form-group label {
-        font-size: 20px;
-        padding-left: 20px;
-    }
-
-    .form-group input {
-        width: calc(100% - 20px);
-        margin-left: 0;
-        margin-top: 10px;
-    }
-
-    .form-group input[type="submit"] {
-        width: 100%;
-        height: auto;
-        margin-top: 20px;
-    }
-
-    footer {
-        height: auto;
-        padding: 15px;
-    }
-}
-

@@ -7,14 +7,12 @@ document.addEventListener("DOMContentLoaded", function() {
         }, 10000); 
     }else{
         //Desafiate E2
-        //recuperas el localstorage de email
-        //getelement by id username
-        //
-
         let userEmail = localStorage.getItem("email");
-        /*if (userEmail) {*/
-            let userEmailVisualElement = document.getElementById("user-email");
-            userEmailVisualElement.textContent = `Hola! ${userEmail}`;
-        /*}*/
+        if(userEmail!=null){
+        let userEmailVisualElement = document.getElementById("user-email");
+        userEmailVisualElement.textContent = `Hola! ${userEmail}`;
+        }else{
+            document.getElementById("user-email").textContent="inicie sesión";
+        }
     }
 });
