@@ -4,22 +4,46 @@ let productos = [];
 //nombre de la categoría
 let catName="";
 
-document.addEventListener("DOMContentLoaded", (event) => {
-    //recupero contenido
-    getJSONData(url)
-      .then(result=>{
-        if(result.status == "ok"){
-          //se guarda la respuesta.
-          productos = result.data.products;
-          catName=result.data.catName;
-          displayProducts(productos, catName);
-        }else{
-          //devolvio error :(
-          alert("Error al cargar contenido");
-        }
-      })
-});
+document.addEventListener("DOMContentLoaded", () => {
+  getJSONData(url).then(result => {
+    if (result.status === "ok") {
+      productos = result.data.products;
+      catName = result.data.catName;
+      displayProducts(productos, catName);
 
+      // Filtros
+      document.getElementById("filterBtn").addEventListener("click", () => {  //Toma click en filtro para aplicar las siguientes funciones
+        const minPrice = parseFloat(document.getElementById("minPrice").value) || 0;  //Toma valor mínimo de campo de entrada y lo pasa a valor numérico, si no hay valor usa 0
+        const maxPrice = parseFloat(document.getElementById("maxPrice").value) || Infinity;  //Toma valor máximo de campo de entrada y lo pasa a valor numérico, si no hay valor usa 0
+        const filteredProducts = productos.filter(item => item.cost >= minPrice && item.cost <= maxPrice); //Filstra según rango de precios
+        displayProducts(filteredProducts, catName);
+      });
+
+      // Ordenación
+      document.getElementById("sortBy").addEventListener("change", (e) => {
+        const sortValue = e.target.value;
+        let sortedProducts;
+
+        switch (sortValue) {
+          case "priceAsc":
+            sortedProducts = [...productos].sort((a, b) => a.cost - b.cost);
+            break;
+          case "priceDesc":
+            sortedProducts = [...productos].sort((a, b) => b.cost - a.cost);
+            break;
+          case "soldCountDesc":
+            sortedProducts = [...productos].sort((a, b) => b.soldCount - a.soldCount); //Vendidos descendente
+            break;
+          default:
+            sortedProducts = productos;
+        }
+        displayProducts(sortedProducts, catName);
+      });
+    } else {
+      alert("Error al cargar contenido");
+    }
+  });
+});
 
 
 //Funcion recibe el array de productos y lo muestra en pantalla.
@@ -40,7 +64,7 @@ function displayProducts(listado, catName){
   <hr class="mt-0"></hr>
   `;
   listado.forEach(item => {
-    content+= ` 
+    content += ` 
     <!-- Productos -->
     <div class="container">
       <div class="row mb-3 text-center fila">
@@ -66,7 +90,7 @@ function displayProducts(listado, catName){
     `;
   });
 
-  document.getElementById("showProducts").innerHTML +=content;
+  document.getElementById("showProducts").innerHTML = content; //Saco +
 }
 
 
