@@ -1,4 +1,4 @@
-// product-info.js
+
 
 // Datos de productos en formato JSON (deberías usar una API o fuente de datos real en un entorno de producción)
 const productos = [
