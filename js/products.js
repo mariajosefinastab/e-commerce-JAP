@@ -1,11 +1,12 @@
-const url = "https://japceibal.github.io/emercado-api/cats_products/101.json";
+const url = "https://japceibal.github.io/emercado-api/cats_products/";
 //array con productos 
 let productos = [];
 //nombre de la categoría
 let catName="";
-
 document.addEventListener("DOMContentLoaded", () => {
-  getJSONData(url).then(result => {
+  let idCat = localStorage.getItem("catID");
+
+  getJSONData(url+idCat+".json").then(result => {
     if (result.status === "ok") {
       productos = result.data.products;
       catName = result.data.catName;
