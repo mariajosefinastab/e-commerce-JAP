@@ -41,6 +41,7 @@
   <main class="pb-5 container">
     <div class="container mt-3">
       <!-- Filtro de precio -->
+
 <div class="row mb-3">
   <div class="col">
     <label for="minPrice">Precio mínimo:</label>
@@ -67,18 +68,24 @@
   </div>
 </div>
 
-      <!-- Productos -->
-      <div id="showProducts" class="container">
-      </div>
-    </div>
-  </main>
-  <footer class="text-muted">
-    <div class="container">
-      <p class="float-end">
-        <a href="#">Volver arriba</a>
-      </p>
-      <p>Este sitio forma parte de <a href="https://jovenesaprogramar.edu.uy/" target="_blank">Jovenes a Programar</a></p>
-    </div>
+    
+<!--Buscador-->
+<div class="row mb-3">
+  <input type="text" id="buscar" onkeyup="busquedaEnElMomento()" placeholder="Buscar en tabla" title="Empieza a escribir para buscar">
+</div>
+
+<!-- Productos -->
+<div id="showProducts" class="container">
+</div>
+</div>
+</main>
+<footer class="text-muted">
+  <div class="container">
+    <p class="float-end">
+    <a href="#">Volver arriba</a>
+    </p>
+    <p>Este sitio forma parte de <a href="https://jovenesaprogramar.edu.uy/" target="_blank">Jovenes a Programar</a></p>
+  </div>
   </footer>
   <div id="spinner-wrapper">
     <div class="lds-ring">
