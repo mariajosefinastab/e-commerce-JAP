@@ -41,49 +41,49 @@
   <main class="pb-5 container">
     <div class="container mt-3">
       <!-- Filtro de precio -->
-<div class="row mb-3">
-  <div class="col">
-    <label for="minPrice">Precio mínimo:</label>
-    <input type="number" id="minPrice" class="form-control" placeholder="Precio mínimo">
-  </div>
-  <div class="col">
-    <label for="maxPrice">Precio máximo:</label>
-    <input type="number" id="maxPrice" class="form-control" placeholder="Precio máximo">
-  </div>
-  <div class="col">
-    <button id="filterBtn" class="btn btn-primary mt-4">Filtrar</button>
-  </div>
-</div>
+      <div class="row mb-3">
+        <div class="col">
+          <label for="minPrice">Precio mínimo:</label>
+          <input type="number" id="minPrice" class="form-control" placeholder="Precio mínimo">
+        </div>
+        <div class="col">
+          <label for="maxPrice">Precio máximo:</label>
+          <input type="number" id="maxPrice" class="form-control" placeholder="Precio máximo">
+        </div>
+        <div class="col">
+          <button id="filterBtn" class="btn btn-primary mt-4">Filtrar</button>
+        </div>
+      </div>
 
-<!-- Ordenación -->
-<div class="row mb-3">
-  <div class="col">
-    <label for="sortBy">Ordenar por:</label>
-    <select id="sortBy" class="form-control">
-      <option value="priceAsc">Precio Ascendente</option>
-      <option value="priceDesc">Precio Descendente</option>
-      <option value="soldCountDesc">Relevancia (Vendidos Descendente)</option>
-    </select>
-  </div>
-</div>
+    <!-- Ordenación -->
+    <div class="row mb-3">
+      <div class="col">
+        <label for="sortBy">Ordenar por:</label>
+        <select id="sortBy" class="form-control">
+          <option value="priceAsc">Precio Ascendente</option>
+          <option value="priceDesc">Precio Descendente</option>
+          <option value="soldCountDesc">Relevancia (Vendidos Descendente)</option>
+        </select>
+      </div>
+    </div>
 
 <!--Buscador-->
 <div class="row mb-3">
   <input type="text" id="buscar" onkeyup="busquedaEnElMomento()" placeholder="Buscar en tabla" title="Empieza a escribir para buscar">
 </div>
 
-      <!-- Productos -->
-      <div id="showProducts" class="container">
-      </div>
-    </div>
-  </main>
-  <footer class="text-muted">
-    <div class="container">
-      <p class="float-end">
-        <a href="#">Volver arriba</a>
-      </p>
-      <p>Este sitio forma parte de <a href="https://jovenesaprogramar.edu.uy/" target="_blank">Jovenes a Programar</a></p>
-    </div>
+<!-- Productos -->
+<div id="showProducts" class="container">
+</div>
+</div>
+</main>
+<footer class="text-muted">
+  <div class="container">
+    <p class="float-end">
+    <a href="#">Volver arriba</a>
+    </p>
+    <p>Este sitio forma parte de <a href="https://jovenesaprogramar.edu.uy/" target="_blank">Jovenes a Programar</a></p>
+  </div>
   </footer>
   <div id="spinner-wrapper">
     <div class="lds-ring">

@@ -1,11 +1,13 @@
-const url = "https://japceibal.github.io/emercado-api/cats_products/101.json";
+const url = "https://japceibal.github.io/emercado-api/cats_products/";
 //array con productos 
 let productos = [];
 //nombre de la categoría
 let catName="";
 
 document.addEventListener("DOMContentLoaded", () => {
-  getJSONData(url).then(result => {
+  let idCat = localStorage.getItem("catID");
+
+  getJSONData(url+idCat+".json").then(result => {
     if (result.status === "ok") {
       productos = result.data.products;
       catName = result.data.catName;
@@ -15,7 +17,6 @@ document.addEventListener("DOMContentLoaded", () => {
       document.getElementById("buscar").addEventListener("keyup", () => {
         busquedaEnElMomento();
       });
-
 
       // Filtros
       document.getElementById("filterBtn").addEventListener("click", () => {  //Toma click en filtro para aplicar las siguientes funciones
@@ -50,6 +51,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 });
+
 
 //Función de búsqueda
 function busquedaEnElMomento() {
