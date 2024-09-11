@@ -5,6 +5,7 @@ let productos = [];
 let catName="";
 
 document.addEventListener("DOMContentLoaded", () => {
+
   let idCat = localStorage.getItem("catID");
 
   getJSONData(url+idCat+".json").then(result => {
@@ -53,15 +54,35 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 
+        switch (sortValue) {
+          case "priceAsc":
+            sortedProducts = [...productos].sort((a, b) => a.cost - b.cost);
+            break;
+          case "priceDesc":
+            sortedProducts = [...productos].sort((a, b) => b.cost - a.cost);
+            break;
+          case "soldCountDesc":
+            sortedProducts = [...productos].sort((a, b) => b.soldCount - a.soldCount); //Vendidos descendente
+            break;
+          default:
+            sortedProducts = productos;
+        }
+        displayProducts(sortedProducts, catName);
+      });
+    } else {
+      alert("Error al cargar contenido");
+    }
+  });
+
 //Función de búsqueda
 function busquedaEnElMomento() {
   var filtro = document.getElementById("buscar").value.toUpperCase(); //Toma lo que se escribió en el input y hace que no sea sensible a mayúsculas/minúsculas
 
-  var filas = document.querySelectorAll("#showProducts .fila"); //Selecciona todos los productos que se muestran
+var filas = document.querySelectorAll("#showProducts .fila"); //Selecciona todos los productos que se muestran
 
   filas.forEach(function(fila) { //Itera sobre cada producto
-
-    var nombreProducto = fila.querySelector(".info p.fs-2").textContent.toUpperCase(); //fila.querySelector(".info p.fs-2") busca dentro de cada fila el elemento con la clase .fs-2 (que parece contener el nombre del producto) y está dentro de un contenedor con la clase .info
+    
+     var nombreProducto = fila.querySelector(".info p.fs-2").textContent.toUpperCase(); //fila.querySelector(".info p.fs-2") busca dentro de cada fila el elemento con la clase .fs-2 (que parece contener el nombre del producto) y está dentro de un contenedor con la clase .info
     
 
     if (nombreProducto.indexOf(filtro) > -1) { //Verifica si el nombre del rpoducto está en el filtro
@@ -71,6 +92,7 @@ function busquedaEnElMomento() {
     }
   });
 }
+
 
 //Funcion recibe el array de productos y lo muestra en pantalla.
 //listado es array con productos, catName es el nombre de la categoria
@@ -92,7 +114,7 @@ function displayProducts(listado, catName){
   listado.forEach(item => {
     content += ` 
     <!-- Productos -->
-    <div class="container">
+    <div class="container" onclick="guardarIDProducto(${item.id})" type= >
       <div class="row mb-3 text-center fila">
         <!--imagen-->
         <div class="col">
@@ -123,6 +145,8 @@ function guardarIDProducto(id) {
   localStorage.setItem('idProducto', id);
   // Redirigir a la página de información del producto
   window.location.href = 'product-info.html';
+
 }
+
 
 
