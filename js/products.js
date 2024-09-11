@@ -3,6 +3,7 @@ const url = "https://japceibal.github.io/emercado-api/cats_products/";
 let productos = [];
 //nombre de la categoría
 let catName="";
+
 document.addEventListener("DOMContentLoaded", () => {
   let idCat = localStorage.getItem("catID");
 
@@ -11,6 +12,11 @@ document.addEventListener("DOMContentLoaded", () => {
       productos = result.data.products;
       catName = result.data.catName;
       displayProducts(productos, catName);
+
+      //Buscador
+      document.getElementById("buscar").addEventListener("keyup", () => {
+        busquedaEnElMomento();
+      });
 
       // Filtros
       document.getElementById("filterBtn").addEventListener("click", () => {  //Toma click en filtro para aplicar las siguientes funciones
@@ -46,6 +52,25 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 });
 
+
+//Función de búsqueda
+function busquedaEnElMomento() {
+  var filtro = document.getElementById("buscar").value.toUpperCase(); //Toma lo que se escribió en el input y hace que no sea sensible a mayúsculas/minúsculas
+
+  var filas = document.querySelectorAll("#showProducts .fila"); //Selecciona todos los productos que se muestran
+
+  filas.forEach(function(fila) { //Itera sobre cada producto
+
+    var nombreProducto = fila.querySelector(".info p.fs-2").textContent.toUpperCase(); //fila.querySelector(".info p.fs-2") busca dentro de cada fila el elemento con la clase .fs-2 (que parece contener el nombre del producto) y está dentro de un contenedor con la clase .info
+    
+
+    if (nombreProducto.indexOf(filtro) > -1) { //Verifica si el nombre del rpoducto está en el filtro
+      fila.style.display = "";  //Si coincide lo muestra
+    } else {
+      fila.style.display = "none"; //Sino no lo muestra
+    }
+  });
+}
 
 //Funcion recibe el array de productos y lo muestra en pantalla.
 //listado es array con productos, catName es el nombre de la categoria
