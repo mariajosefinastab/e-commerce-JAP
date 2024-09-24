@@ -193,3 +193,30 @@ a.custom-card:hover {
   color: white;
   font-size: 20px;
 }
+
+.star-rating {
+  display: flex;
+  direction: row-reverse;
+  justify-content: flex-start;
+  margin: 20px 0;
+}
+
+.star-rating input {
+  display: none;
+}
+
+.star-rating label {
+  font-size: 30px;
+  color: #ccc;
+  cursor: pointer;
+}
+
+.star-rating input:checked ~ label,
+.star-rating input:checked ~ label ~ label {
+  color: #f39c12; 
+}
+
+.star-rating label:hover,
+.star-rating label:hover ~ label {
+  color: #f39c12; 
+}
