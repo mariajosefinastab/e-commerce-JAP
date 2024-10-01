@@ -1,5 +1,6 @@
 
 url="https://japceibal.github.io/emercado-api/products/"
+
 let catName="";
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -14,6 +15,16 @@ document.addEventListener("DOMContentLoaded", () => {
       alert("Error al cargar contenido");
     }
   });
+// Mostrar Comentarios 
+
+getJSONData(PRODUCT_INFO_COMMENTS_URL+idProducto+".json").then(result => {
+  if (result.status === "ok") {
+    comentarios = result.data;
+    displayComments (comentarios,idProducto)
+  } else {
+    alert("Error al cargar contenido");
+  }
+});
 
 });
 
@@ -75,6 +86,46 @@ function displayProduct(producto, idProducto){
 
 }
 
+
+// Declarar funcion mostrar comentarios
+
+function displayComments (comentarios,idProducto) {
+  
+  // Mostrar una Calificacion 
+  let content='';
+   comentarios.forEach (comentario => {
+    console.log(comentario);
+        content += `
+          <div>
+            <p class="fw-bold">${comentario.user}</p>
+      
+            <p>${comentario.description}</p>
+      
+            <div class="row">
+      
+              <div class="col">
+      
+                <p>${comentario.dateTime}</p>
+              </div>
+            
+           <div class="col text-end">
+          `;
+           for (let i = 1; i <= 5; i++) {
+               content += `<span class="fa fa-star ${i <= comentario.score ? 'checked' : ''}"></span>`;
+           }
+            content += ` 
+            </div>
+            </div>
+            <hr>
+          </div>
+        `;        
+      }) 
+
+  
+  document.getElementById("mostrarComentarios").innerHTML = content; 
+  
+}
+
 //-----------------------Comentario Nuevo-----------------------
   let sendButton = document.getElementById("send-comment")
 sendButton.addEventListener("click", () => {
@@ -131,4 +182,5 @@ sendButton.addEventListener("click", () => {
   sendButton.disabled = true; 
   
 });
+
 
