@@ -74,6 +74,7 @@ function displayProduct(producto, idProducto){
   document.getElementsByClassName("carousel-item")[0].classList.add("active");
 
 }
+
 //-----------------------Comentario Nuevo-----------------------
   let sendButton = document.getElementById("send-comment")
 sendButton.addEventListener("click", () => {
