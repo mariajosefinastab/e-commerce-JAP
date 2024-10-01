@@ -75,8 +75,8 @@ function displayProduct(producto, idProducto){
 
 }
 //-----------------------Comentario Nuevo-----------------------
-
-document.getElementById("send-comment").addEventListener("click", () => {
+  let sendButton = document.getElementById("send-comment")
+sendButton.addEventListener("click", () => {
 
   let textComment = document.getElementById("text-comment").value;
   let email = localStorage.getItem("email");
@@ -127,7 +127,7 @@ document.getElementById("send-comment").addEventListener("click", () => {
       
   `
   document.getElementById("calificacionMostrar").innerHTML += commentContent;
-
+  sendButton.disabled = true; 
   
 });
 
