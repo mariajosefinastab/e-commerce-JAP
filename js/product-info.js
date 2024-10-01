@@ -74,3 +74,61 @@ function displayProduct(producto, idProducto){
   document.getElementsByClassName("carousel-item")[0].classList.add("active");
 
 }
+
+//-----------------------Comentario Nuevo-----------------------
+  let sendButton = document.getElementById("send-comment")
+sendButton.addEventListener("click", () => {
+
+  let textComment = document.getElementById("text-comment").value;
+  let email = localStorage.getItem("email");
+  let stars = ""
+  var fecha = new Date();
+  var fechaFormateada = fecha.getDate() + "/" + (fecha.getMonth() + 1) + "/" + fecha.getFullYear();
+ // console.log(fechaFormateada);
+
+  for (let i = 1; i <= 5; i++) {
+    if (i <= document.querySelector('input[name="rating"]:checked').value){
+      stars += 
+    `
+    <label title="${i} estrellas" class= "checked">&#9733;</label>
+
+    `
+    }else{
+      stars += 
+    `
+    <label title="${i} estrellas">&#9733;</label>
+
+    `
+    };
+
+  };
+
+  let commentContent = 
+
+  `
+   <div>
+      <p class="fw-bold">${email}</p>
+
+      <p>${textComment}</p>
+
+      <div class="row">
+  
+        <div class="col">
+
+          <p>${fechaFormateada}</p>
+        </div>
+        <div class="col text-end fs-3">
+          ${stars}
+        </div>
+
+      </div>
+      <hr>
+    </div>
+     
+      
+  `
+  document.getElementById("calificacionMostrar").innerHTML += commentContent;
+  sendButton.disabled = true; 
+  
+});
+
