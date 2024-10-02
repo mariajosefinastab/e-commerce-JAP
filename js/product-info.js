@@ -98,20 +98,15 @@ function displayComments (comentarios,idProducto) {
         content += `
           <div>
             <p class="fw-bold">${comentario.user}</p>
-      
             <p>${comentario.description}</p>
-      
             <div class="row">
-      
               <div class="col">
-      
                 <p>${comentario.dateTime}</p>
               </div>
-            
-           <div class="col text-end">
+           <div class="col text-end fs-3">
           `;
            for (let i = 1; i <= 5; i++) {
-               content += `<span class="fa fa-star ${i <= comentario.score ? 'checked' : ''}"></span>`;
+               content += `<label class="${i <= comentario.score ? 'checked' : ''}">&#9733;</label>`;
            }
             content += ` 
             </div>
@@ -139,45 +134,26 @@ sendButton.addEventListener("click", () => {
 
   for (let i = 1; i <= 5; i++) {
     if (i <= document.querySelector('input[name="rating"]:checked').value){
-      stars += 
-    `
-    <label title="${i} estrellas" class= "checked">&#9733;</label>
-
-    `
+      stars += `<label title="${i} estrellas" class="checked">&#9733;</label>`
     }else{
-      stars += 
-    `
-    <label title="${i} estrellas">&#9733;</label>
-
-    `
+      stars += `<label title="${i} estrellas">&#9733;</label>`
     };
-
   };
 
   let commentContent = 
-
-  `
-   <div>
+  `<div>
       <p class="fw-bold">${email}</p>
-
       <p>${textComment}</p>
-
       <div class="row">
-  
         <div class="col">
-
           <p>${fechaFormateada}</p>
         </div>
         <div class="col text-end fs-3">
           ${stars}
         </div>
-
       </div>
       <hr>
-    </div>
-     
-      
-  `
+    </div>`;
   document.getElementById("calificacionMostrar").innerHTML += commentContent;
   sendButton.disabled = true; 
   
