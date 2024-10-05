@@ -11,20 +11,24 @@ document.addEventListener("DOMContentLoaded", () => {
     if (result.status === "ok") {
       producto = result.data;
       displayProduct(producto, idProducto);
+      displayRelated(producto);
     } else {
       alert("Error al cargar contenido");
     }
   });
-// Mostrar Comentarios 
+  // Mostrar Comentarios 
 
-getJSONData(PRODUCT_INFO_COMMENTS_URL+idProducto+".json").then(result => {
-  if (result.status === "ok") {
-    comentarios = result.data;
-    displayComments (comentarios,idProducto)
-  } else {
-    alert("Error al cargar contenido");
-  }
-});
+  getJSONData(PRODUCT_INFO_COMMENTS_URL+idProducto+".json").then(result => {
+    if (result.status === "ok") {
+      comentarios = result.data;
+      displayComments (comentarios,idProducto)
+    } else {
+      alert("Error al cargar contenido");
+    }
+  });
+
+
+  
 
 });
 
@@ -160,3 +164,24 @@ sendButton.addEventListener("click", () => {
 });
 
 
+function displayRelated(producto){
+  console.log("producto:");
+  let content = '';
+  producto.relatedProducts.forEach( rproduct =>{
+    content += `
+    <div class="card ms-3" style="width: 18rem;" onclick="goRelated(${rproduct.id})">
+       <img src="${rproduct.image}" alt="Producto Relacionado" class="img-fluid mt-3">
+      <div class="card-body">
+        <h5 class="card-title">${rproduct.name}</h5>
+      </div>
+    </div>`;
+
+  })
+  document.getElementById("related").innerHTML = content;
+  console.log(producto)
+}
+
+function goRelated(id){
+  localStorage.setItem('idProducto', id);
+  window.location.href = "product-info.html";
+}
