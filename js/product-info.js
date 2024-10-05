@@ -157,15 +157,16 @@ sendButton.addEventListener("click", () => {
         </div>
       </div>
       <hr>
-    </div>`;
+  </div>`;
   document.getElementById("calificacionMostrar").innerHTML += commentContent;
+  
+  //calificacionMostrar
   sendButton.disabled = true; 
   
 });
 
 
 function displayRelated(producto){
-  console.log("producto:");
   let content = '';
   producto.relatedProducts.forEach( rproduct =>{
     content += `
@@ -178,7 +179,6 @@ function displayRelated(producto){
 
   })
   document.getElementById("related").innerHTML = content;
-  console.log(producto)
 }
 
 function goRelated(id){
