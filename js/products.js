@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+ HEAD
 // products.js
 
 // Datos de productos en formato JSON
@@ -80,13 +80,13 @@ function guardarIDProducto(id) {
 // Mostrar productos al cargar la página
 document.addEventListener('DOMContentLoaded', mostrarProductos);
 
-=======
+
 const url = "https://japceibal.github.io/emercado-api/cats_products/101.json";
 //array con productos 
-let productos = [];
+let producto = [];
 //nombre de la categoría
 let catName="";
->>>>>>> 8d5419e8b738c456b25b46165eea36237d900473
+ d5419e8b738c456b25b46165eea36237d900473
 
 document.addEventListener("DOMContentLoaded", () => {
   getJSONData(url).then(result => {
