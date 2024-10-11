@@ -193,3 +193,10 @@ a.custom-card:hover {
   color: white;
   font-size: 20px;
 }
+
+.is-valid {
+  border-color: #28a745 !important; /* Verde */
+}
+.is-invalid {
+  border-color: #dc3545 !important; /* Rojo */
+}
