@@ -61,7 +61,7 @@
     <form id="registroForm" class="needs-validation" novalidate>
       <div class="row justify-content-around">
         <div class="col-md-6 align-self-start">
-          <label>Foto</label>
+          <label>Foto de perfil</label>
           <div class="needsclick dz-clickable" id="file-upload">
             <div class="dz-message needsclick">
               Arrastra tu foto aquí<br>
@@ -73,20 +73,30 @@
         </div>
 
         <div class="col-md-6 justify-content-between">
-          <label for="nombre" class="form-label">Nombre</label>
+          <label for="nombre" class="form-label">Nombre*</label>
           <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Nombre" required>
           <div class="invalid-feedback" id="nombreError">Debe completar el campo</div>
 
-          <label for="apellido" class="form-label">Apellido</label>
+          <label for="segundoNombre" class="form-label">Segundo nombre</label>
+          <input type="text" class="form-control" id="segundoNombre" name="segundoNombre" placeholder="Segundo nombre">
+
+          <label for="apellido" class="form-label">Apellido*</label>
           <input type="text" class="form-control" id="apellido" name="apellido" placeholder="Apellido" required>
           <div class="invalid-feedback" id="apellidoError">Debe completar el campo</div>
 
-          <label for="email">Email</label>
+          <label for="segundoApellido" class="form-label">Segundo apellido</label>
+          <input type="text" class="form-control" id="segundoApellido" name="segundoApellido" placeholder="Segundo apellido">
+
+          <label for="email">E-mail*</label>
           <input type="email" class="form-control" id="email" name="email" placeholder="email@email.com" required>
           <div class="invalid-feedback" id="emailError">Debe completar el campo</div>
+
+          <label for="telefono" class="form-label">Teléfono de contacto</label>
+          <input type="tel" class="form-control" id="telefono" name="telefono" placeholder="Teléfono de contacto">
         </div>
       </div>
     </form>
+
 
 
   <footer class="text-muted">
