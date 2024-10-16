@@ -14,6 +14,28 @@ document.addEventListener("DOMContentLoaded", () => {
       alert("Error al cargar contenido");
     }
   });
+  // Mostrar Comentarios 
+
+  getJSONData(PRODUCT_INFO_COMMENTS_URL+idProducto+".json").then(result => {
+    if (result.status === "ok") {
+      comentarios = result.data;
+      displayComments (comentarios,idProducto)
+    } else {
+      alert("Error al cargar contenido");
+    }
+  });
+  
+  document.getElementById("cerrar-sesion").addEventListener("click", (event)=>{
+    let email = localStorage.getItem("email");
+    email = ""
+    document.getElementById("user-email").innerHTML = ""
+    window.location = "login.html"
+    console.log(email);
+
+});
+
+
+  
 
 });
 
@@ -132,3 +154,48 @@ sendButton.addEventListener("click", () => {
   
 });
 
+
+function displayRelated(producto){
+  let content = '';
+  producto.relatedProducts.forEach( rproduct =>{
+    content += `
+    <div class="card ms-3" style="width: 18rem;" onclick="goRelated(${rproduct.id})">
+       <img src="${rproduct.image}" alt="Producto Relacionado" class="img-fluid mt-3">
+      <div class="card-body">
+        <h5 class="card-title">${rproduct.name}</h5>
+      </div>
+    </div>`;
+
+  })
+  document.getElementById("related").innerHTML = content;
+}
+
+function goRelated(id){
+  localStorage.setItem('idProducto', id);
+  window.location.href = "product-info.html";
+}
+
+
+
+
+//----------------------------------Menu desplegable----------------------------------
+
+
+document.getElementById("user-email").addEventListener("click", function(event) {
+  //event.preventDefault(); // Evita el comportamiento por defecto del enlace
+  var dropdown = document.getElementById("dropdown-menu");
+  dropdown.classList.toggle("show");
+});
+
+// Cierra el menú si se hace clic fuera del mismo
+window.onclick = function(event) {
+  if (!event.target.matches('#user-email')) {
+      var dropdowns = document.getElementsByClassName("dropdown-menu");
+      for (var i = 0; i < dropdowns.length; i++) {
+          var openDropdown = dropdowns[i];
+          if (openDropdown.classList.contains('show')) {
+              openDropdown.classList.remove('show');
+          }
+      }
+  }
+}
