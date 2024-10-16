@@ -152,7 +152,7 @@ function displayComments (comentarios,idProducto) {
 sendButton.addEventListener("click", () => {
 
   let textComment = document.getElementById("text-comment").value;
-  let email = localStorage.getItem("email");
+  let user = getUser();
   let stars = ""
   var fecha = new Date();
   var fechaFormateada = fecha.getDate() + "/" + (fecha.getMonth() + 1) + "/" + fecha.getFullYear();
@@ -168,7 +168,7 @@ sendButton.addEventListener("click", () => {
 
   let commentContent = 
   `<div>
-      <p class="fw-bold">${email}</p>
+      <p class="fw-bold">${user.nombre}</p>
       <p>${textComment}</p>
       <div class="row">
         <div class="col">
@@ -213,6 +213,17 @@ function goRelated(id){
 
 
 //----------------------------------Menu desplegable----------------------------------
+document.addEventListener("DOMContentLoaded", ()=>{
+  document.getElementById("cerrar-sesion").addEventListener("click", (event)=>{
+      let email = localStorage.getItem("email");
+      email = ""
+      document.getElementById("user-email").innerHTML = ""
+      window.location = "login.html"
+      console.log(email);
+
+  });
+
+})
 
 
 document.getElementById("user-email").addEventListener("click", function(event) {
@@ -234,5 +245,4 @@ window.onclick = function(event) {
   }
 }
 
-}
 

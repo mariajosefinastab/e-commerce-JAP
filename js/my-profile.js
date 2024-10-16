@@ -1,5 +1,8 @@
 
 document.addEventListener("DOMContentLoaded", function() {
+  //muestro foto de perfil
+  displayProfilePhoto();
+
   const form = document.getElementById('registroForm');
   const nombreInput = document.getElementById('nombre');
   const apellidoInput = document.getElementById('apellido');
@@ -9,18 +12,17 @@ document.addEventListener("DOMContentLoaded", function() {
   const telefonoInput = document.getElementById('telefono');
   const button = document.querySelector('.btn-primary');
 
-  const userLoggedIn = localStorage.getItem("userLoggedIn");
 
-  // Verifica si el usuario está logueado
-  if (!userLoggedIn) {
-    alert("Debes iniciar sesión para acceder a tu perfil.");
-    window.location.href = "login.html";
-  } else {
-    
-    emailInput.value = userLoggedIn;
-  }
+  let user = getUser();
+  nombreInput.value = user.nombre;
+  apellidoInput.value = user.apellido;
+  emailInput.value = user.email;
+
+
 
   button.addEventListener('click', function(event) {
+    console.log("entro funcion")
+
     event.preventDefault();
 
     let isValid = true;
@@ -55,23 +57,56 @@ document.addEventListener("DOMContentLoaded", function() {
 
     // Si todos los campos son válidos guardar en localStorage
     if (isValid) {
-      const data = {
-        nombre: nombreInput.value,
-        segundoNombre: segundoNombreInput.value,
-        apellido: apellidoInput.value,
-        segundoApellido: segundoApellidoInput.value,
-        email: emailInput.value,
-        telefono: telefonoInput.value,
-      };
+      user.nombre = nombreInput.value,
+      user.segundoNombre = segundoNombreInput.value,
+      user.apellido= apellidoInput.value,
+      user.segundoApellido= segundoApellidoInput.value,
+      user.email= emailInput.value,
+      user.telefono= telefonoInput.value
+      }
 
       // Guardar en almacenamiento local
-      localStorage.setItem("userProfile", JSON.stringify(data));
+      setUser(user);
+      //Guardo foto de perfil
+      saveData();
+      //localStorage.setItem("userProfile", JSON.stringify(data));
       alert("Perfil guardado con éxito.");
-    }
+    
   });
 });
 
+/*Funciones para guardar y mostrar foto de perfil*/
+function displayProfilePhoto(){
+  let user = getUser();
+  let foto = user.foto;
+  if(foto != ""){
+      console.log("entre");
+      console.log(foto);
+      //let imgInput = 
+      document.getElementById("profile").src = foto;
+      //imgInput.setAttribute("src", foto);
+  }
+}
 
+function saveData(){
+  let user = getUser();
+  let imgInput = document.getElementById("imgInput");
+  if(imgInput.value != ""){
+    if(imgInput.files[0].size > 1000000){
+        console.log("imagen grande viejo");
+        return false
+    }
+
+    const fr = new FileReader();
+    fr.readAsDataURL(imgInput.files[0]);
+    //event listener para cargar la foto.
+    fr.addEventListener("load", ()=>{
+        user.foto = fr.result;
+        setUser(user);
+        displayProfilePhoto();
+    })
+  }
+}
 
 
 

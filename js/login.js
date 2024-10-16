@@ -15,9 +15,14 @@ document.addEventListener("DOMContentLoaded", function() {
             password.classList.add("is-invalid");
         } else {
             // Guardar el estado de autenticación y el email
+            let user = getUser();
+            user.authenticated = "true";
+            user.email = email.value.trim();
+            setUser(user);/*
             localStorage.setItem("authenticated", "true");
             localStorage.setItem("userLoggedIn", email.value.trim()); //Cambio de email a userLoggedIn 
-            window.location.href = "products.html";
+            */
+            window.location.href = "categories.html";
         }
     });
 });
