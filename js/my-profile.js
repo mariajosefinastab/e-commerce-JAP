@@ -35,7 +35,6 @@ document.addEventListener("DOMContentLoaded", function() {
       isValid = false;
     }
 
-
     if (apellidoInput.checkValidity()) {
       apellidoInput.classList.remove('is-invalid');
       apellidoInput.classList.add('is-valid');
