@@ -284,10 +284,7 @@ a.custom-card:hover {
 .star-rating input:checked + label {
   color: #f39c12; 
 }
-
 .star-rating label:hover,
 .star-rating label:hover ~ label {
   color: #ccc;
 }
-
-
