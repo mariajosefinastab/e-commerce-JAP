@@ -258,7 +258,6 @@ a.custom-card:hover {
 
 .star-rating {
   display: flex;
-  direction: row-reverse;
   justify-content: flex-start;
   margin: 20px 0;
 }
@@ -273,12 +272,22 @@ a.custom-card:hover {
   cursor: pointer;
 }
 
-.star-rating input:checked ~ label,
-.star-rating input:checked ~ label ~ label {
+.star-rating input:hover + label,
+.star-rating input:checked + label{
+  color: #f39c12;
+}
+
+.star-rating input:checked ~ label {
   color: #ccc; 
+}
+
+.star-rating input:checked + label {
+  color: #f39c12; 
 }
 
 .star-rating label:hover,
 .star-rating label:hover ~ label {
-  color: #ccc; 
+  color: #ccc;
 }
+
+

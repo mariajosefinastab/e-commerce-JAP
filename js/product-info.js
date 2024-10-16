@@ -1,5 +1,6 @@
 
 url="https://japceibal.github.io/emercado-api/products/"
+
 let catName="";
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -10,6 +11,17 @@ document.addEventListener("DOMContentLoaded", () => {
     if (result.status === "ok") {
       producto = result.data;
       displayProduct(producto, idProducto);
+      displayRelated(producto);
+    } else {
+      alert("Error al cargar contenido");
+    }
+  });
+  // Mostrar Comentarios 
+
+  getJSONData(PRODUCT_INFO_COMMENTS_URL+idProducto+".json").then(result => {
+    if (result.status === "ok") {
+      comentarios = result.data;
+      displayComments (comentarios,idProducto)
     } else {
       alert("Error al cargar contenido");
     }
@@ -33,6 +45,9 @@ document.addEventListener("DOMContentLoaded", () => {
     console.log(email);
 
 });
+
+
+  
 
 
   
@@ -97,6 +112,41 @@ function displayProduct(producto, idProducto){
 
 }
 
+
+// Declarar funcion mostrar comentarios
+
+function displayComments (comentarios,idProducto) {
+  
+  // Mostrar una Calificacion 
+  let content='';
+   comentarios.forEach (comentario => {
+    console.log(comentario);
+        content += `
+          <div>
+            <p class="fw-bold">${comentario.user}</p>
+            <p>${comentario.description}</p>
+            <div class="row">
+              <div class="col">
+                <p>${comentario.dateTime}</p>
+              </div>
+           <div class="col text-end fs-3">
+          `;
+           for (let i = 1; i <= 5; i++) {
+               content += `<label class="${i <= comentario.score ? 'checked' : ''}">&#9733;</label>`;
+           }
+            content += ` 
+            </div>
+            </div>
+            <hr>
+          </div>
+        `;        
+      }) 
+
+  
+  document.getElementById("mostrarComentarios").innerHTML = content; 
+  
+}
+
 //-----------------------Comentario Nuevo-----------------------
   let sendButton = document.getElementById("send-comment")
 sendButton.addEventListener("click", () => {
@@ -110,46 +160,29 @@ sendButton.addEventListener("click", () => {
 
   for (let i = 1; i <= 5; i++) {
     if (i <= document.querySelector('input[name="rating"]:checked').value){
-      stars += 
-    `
-    <label title="${i} estrellas" class= "checked">&#9733;</label>
-
-    `
+      stars += `<label title="${i} estrellas" class="checked">&#9733;</label>`
     }else{
-      stars += 
-    `
-    <label title="${i} estrellas">&#9733;</label>
-
-    `
+      stars += `<label title="${i} estrellas">&#9733;</label>`
     };
-
   };
 
   let commentContent = 
-
-  `
-   <div>
+  `<div>
       <p class="fw-bold">${email}</p>
-
       <p>${textComment}</p>
-
       <div class="row">
-  
         <div class="col">
-
           <p>${fechaFormateada}</p>
         </div>
         <div class="col text-end fs-3">
           ${stars}
         </div>
-
       </div>
       <hr>
-    </div>
-     
-      
-  `
+  </div>`;
   document.getElementById("calificacionMostrar").innerHTML += commentContent;
+  
+  //calificacionMostrar
   sendButton.disabled = true; 
   
 });
@@ -173,6 +206,7 @@ function displayRelated(producto){
 function goRelated(id){
   localStorage.setItem('idProducto', id);
   window.location.href = "product-info.html";
+
 }
 
 
@@ -199,3 +233,6 @@ window.onclick = function(event) {
       }
   }
 }
+
+}
+
