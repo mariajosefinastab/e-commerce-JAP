@@ -6,7 +6,6 @@ let catName="";
 
 document.addEventListener("DOMContentLoaded", () => {
   let idCat = localStorage.getItem("catID");
-
   getJSONData(url+idCat+".json").then(result => {
     if (result.status === "ok") {
       productos = result.data.products;
@@ -23,47 +22,49 @@ document.addEventListener("DOMContentLoaded", () => {
         const minPrice = parseFloat(document.getElementById("minPrice").value) || 0;  //Toma valor mínimo de campo de entrada y lo pasa a valor numérico, si no hay valor usa 0
         const maxPrice = parseFloat(document.getElementById("maxPrice").value) || Infinity;  //Toma valor máximo de campo de entrada y lo pasa a valor numérico, si no hay valor usa 0
         const filteredProducts = productos.filter(item => item.cost >= minPrice && item.cost <= maxPrice); //Filstra según rango de precios
-        displayProducts(filteredProducts, catName);
-      });
 
-      // Ordenación
-      document.getElementById("sortBy").addEventListener("change", (e) => {
-        const sortValue = e.target.value;
+        //Ordenacion
+        const sortValue = document.getElementById("sortBy").value;
         let sortedProducts;
-
         switch (sortValue) {
           case "priceAsc":
-            sortedProducts = [...productos].sort((a, b) => a.cost - b.cost);
+            sortedProducts = [...filteredProducts].sort((a, b) => a.cost - b.cost);
             break;
           case "priceDesc":
-            sortedProducts = [...productos].sort((a, b) => b.cost - a.cost);
+            sortedProducts = [...filteredProducts].sort((a, b) => b.cost - a.cost);
             break;
           case "soldCountDesc":
-            sortedProducts = [...productos].sort((a, b) => b.soldCount - a.soldCount); //Vendidos descendente
+            sortedProducts = [...filteredProducts].sort((a, b) => b.soldCount - a.soldCount); //Vendidos descendente
             break;
           default:
-            sortedProducts = productos;
+            sortedProducts = filteredProducts;
         }
+
         displayProducts(sortedProducts, catName);
       });
+
     } else {
       alert("Error al cargar contenido");
     }
   });
+
+  document.getElementById("cerrar-sesion").addEventListener("click", (event)=>{
+    let email = localStorage.getItem("email");
+    email = ""
+    document.getElementById("user-email").innerHTML = ""
+    window.location = "login.html"
+    console.log(email);
+
 });
 
+});
 
 //Función de búsqueda
 function busquedaEnElMomento() {
   var filtro = document.getElementById("buscar").value.toUpperCase(); //Toma lo que se escribió en el input y hace que no sea sensible a mayúsculas/minúsculas
-
   var filas = document.querySelectorAll("#showProducts .fila"); //Selecciona todos los productos que se muestran
-
-  filas.forEach(function(fila) { //Itera sobre cada producto
-
+  filas.forEach(function(fila) { //Itera sobre cada producto 
     var nombreProducto = fila.querySelector(".info p.fs-2").textContent.toUpperCase(); //fila.querySelector(".info p.fs-2") busca dentro de cada fila el elemento con la clase .fs-2 (que parece contener el nombre del producto) y está dentro de un contenedor con la clase .info
-    
-
     if (nombreProducto.indexOf(filtro) > -1) { //Verifica si el nombre del rpoducto está en el filtro
       fila.style.display = "";  //Si coincide lo muestra
     } else {
@@ -71,6 +72,7 @@ function busquedaEnElMomento() {
     }
   });
 }
+
 
 //Funcion recibe el array de productos y lo muestra en pantalla.
 //listado es array con productos, catName es el nombre de la categoria
@@ -92,7 +94,7 @@ function displayProducts(listado, catName){
   listado.forEach(item => {
     content += ` 
     <!-- Productos -->
-    <div class="container">
+    <div class="container list-group-item list-group-item-action cursor-active" onclick="guardarIDProducto(${item.id})">
       <div class="row mb-3 text-center fila">
         <!--imagen-->
         <div class="col">
@@ -123,6 +125,30 @@ function guardarIDProducto(id) {
   localStorage.setItem('idProducto', id);
   // Redirigir a la página de información del producto
   window.location.href = 'product-info.html';
+}
+
+
+
+//----------------------------------Menu desplegable----------------------------------
+
+
+document.getElementById("user-email").addEventListener("click", function(event) {
+  //event.preventDefault(); // Evita el comportamiento por defecto del enlace
+  var dropdown = document.getElementById("dropdown-menu");
+  dropdown.classList.toggle("show");
+});
+
+// Cierra el menú si se hace clic fuera del mismo
+window.onclick = function(event) {
+  if (!event.target.matches('#user-email')) {
+      var dropdowns = document.getElementsByClassName("dropdown-menu");
+      for (var i = 0; i < dropdowns.length; i++) {
+          var openDropdown = dropdowns[i];
+          if (openDropdown.classList.contains('show')) {
+              openDropdown.classList.remove('show');
+          }
+      }
+  }
 }
 
 

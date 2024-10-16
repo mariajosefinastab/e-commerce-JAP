@@ -1,3 +1,4 @@
+
 document.addEventListener("DOMContentLoaded", function() {
   const form = document.getElementById('registroForm');
   const nombreInput = document.getElementById('nombre');
@@ -72,9 +73,28 @@ document.addEventListener("DOMContentLoaded", function() {
 
 
 
-//function colorear
 
-/* function isValid(elemento){
-    elemento,classList.remove('is-valid')
-    elemento.classList.remove('is-invalid')
-} */
+
+
+//----------------------------------Menu desplegable----------------------------------
+
+
+document.getElementById("user-email").addEventListener("click", function(event) {
+    //event.preventDefault(); // Evita el comportamiento por defecto del enlace
+    var dropdown = document.getElementById("dropdown-menu");
+    dropdown.classList.toggle("show");
+});
+
+// Cierra el menú si se hace clic fuera del mismo
+window.onclick = function(event) {
+    if (!event.target.matches('#user-email')) {
+        var dropdowns = document.getElementsByClassName("dropdown-menu");
+        for (var i = 0; i < dropdowns.length; i++) {
+            var openDropdown = dropdowns[i];
+            if (openDropdown.classList.contains('show')) {
+                openDropdown.classList.remove('show');
+            }
+        }
+    }
+}
+
