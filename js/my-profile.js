@@ -8,8 +8,7 @@ document.addEventListener("DOMContentLoaded", function() {
   const telefonoInput = document.getElementById('telefono');
   const button = document.querySelector('.btn-primary');
 
-  // Simular el inicio de sesión
-  const userLoggedIn = localStorage.getItem("userLoggedIn"); // Debes cambiar esto según tu lógica de autenticación
+  const userLoggedIn = localStorage.getItem("userLoggedIn");
 
   // Verifica si el usuario está logueado
   if (!userLoggedIn) {
