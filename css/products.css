@@ -83,3 +83,12 @@
         text-align: left;
     }
 }
+.dark { 
+  background-color: #212529;
+  color: #fff
+  }
+
+.dark #cat-list-container{
+  background-color: #212529;
+  color: #fff
+}
