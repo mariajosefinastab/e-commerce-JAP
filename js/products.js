@@ -1,6 +1,7 @@
 const url = "https://japceibal.github.io/emercado-api/cats_products/";
+
 //array con productos 
-let productos = [];
+let producto = [];
 //nombre de la categoría
 let catName="";
 
