@@ -288,7 +288,7 @@ a.custom-card:hover {
 .star-rating label:hover ~ label {
   color: #ccc;
 }
-
+/*
 .switch {
   background: #343d5b;
   border-radius: 100px;
@@ -298,8 +298,21 @@ a.custom-card:hover {
   display: flex;
   outline: none;
   padding: 5px; 
-}
+}*/
 
+.switch {
+  background: #343d5b;
+  border-radius: 100px;
+  border: none;
+  position: relative;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;  /* Centra horizontalmente /
+  align-items: center;      / Centra verticalmente /
+  outline: none;
+  width: 100px;             / Ajusta el ancho según necesites /
+  height: 50px;            / Ajusta la altura según necesites */
+}
 .switch::after {
   content: "";
   display: block;
@@ -330,12 +343,19 @@ span {
   color: #ffff;
 }
 
+/*Tema oscuro*/
 .dark { 
   background-color: #212529;
   color: #fff
   }
 
-.dark #cat-list-container{
+.dark #cat-list-container,
+.dark .form-control{
   background-color: #212529;
+  color: #fff
+}
+.dark .list-group-item{
+  background-color: #212529;
+  border: 1px solid rgba(255, 255, 255, .125);
   color: #fff
 }

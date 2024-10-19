@@ -22,6 +22,14 @@ let defaultUser={
   }
 }
 
+document.addEventListener("DOMContentLoaded", ()=>{
+  user = getUser();
+  if(document.body.className != user.theme){
+    tema();
+  }
+
+})
+
 function getUser(){
   let data = JSON.parse(localStorage.getItem(LOCALKEY));
   if(data == null){
@@ -74,9 +82,25 @@ let getJSONData = function(url){
         return result;
     });
 }
-const btnSwitch = document.querySelector('#switch'); 
 
-btnSwitch.addEventListener('click', () => {
-    document.body.classList.toggle('dark')
-    btnSwitch.classList.toggle('active')
-})
+
+
+/* Cambiar tema */
+const btnSwitch = document.querySelector('#switch'); 
+btnSwitch.addEventListener('click', tema);
+
+function tema(){
+  let btnSwitch = document.querySelector('#switch'); 
+  btnSwitch.classList.toggle('active');
+
+  document.body.classList.toggle('dark');
+  let user = getUser();
+
+  if(document.body.className == "dark"){
+    user.theme = "dark";
+  }else{
+    user.theme = "";
+  }
+  console.log(user.theme)
+  setUser(user);
+}
