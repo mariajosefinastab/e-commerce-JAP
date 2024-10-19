@@ -23,7 +23,7 @@
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav w-100 justify-content-between">
           <li class="nav-item">
-            <a class="nav-link" href="index.html">Inicio</a>
+            <a class="nav-link active" href="index.html">Inicio</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="categories.html">Categorías</a>
@@ -38,10 +38,20 @@
             <span><i class="fa-regular fa-moon"></i></span>
             <span><i class="fa-solid fa-moon"></i></span>
            </button>
+          <!--Menu desplegable-->
+          <li class="nav-item dropdown">
+            <a id="user-email" class="nav-link dropdown-toggle" href="#"></a>
+            <ul id="dropdown-menu" class="dropdown-menu">
+                <li><a class="dropdown-item" id="mi-carrito" href="cart.html">Mi carrito</a></li>
+                <li><a class="dropdown-item" id="mi-perfil" href="my-profile.html">Mi perfil</a></li>
+                <li><a class="dropdown-item" id="cerrar-sesion" href="#">Cerrar Sesión</a></li>
+            </ul>
+        </li>
         </ul>
       </div>
     </div>
   </nav>
+
   <main>
     <div class="container mt-4">
       <div id="product-info" class="text-center">
@@ -52,7 +62,52 @@
         <p id="vendidosProducto">Cantidad Vendida</p>
       </div>
     </div>
-  </main>
+
+    <!-- user review -->
+    <div class="container mt-4 text-center">
+      <h2>Calificación</h2>
+      <div class="star-rating">
+        <input id="star-1" type="radio" name="rating" value="1">
+        <label for="star-1" title="1 estrellas">&#9733;</label>
+        <input id="star-2" type="radio" name="rating" value="2">
+        <label for="star-2" title="2 estrellas">&#9733;</label>
+        <input id="star-3" type="radio" name="rating" value="3">
+        <label for="star-3" title="3 estrellas">&#9733;</label>
+        <input id="star-4" type="radio" name="rating" value="4">
+        <label for="star-4" title="4 estrellas">&#9733;</label>
+        <input id="star-5" type="radio" name="rating" value="5">
+        <label for="star-5" title="5 estrella">&#9733;</label>
+      </div>
+
+        
+      <div class="form-group mt-3">
+        <textarea id="text-comment" class="form-control" rows="4" placeholder="Escribe tu comentario aquí..." required></textarea>
+      </div>
+      <button id="send-comment" class="btn btn-primary mt-2">Enviar Calificación</button>
+      <hr>
+    </div>
+
+    <!-- Mostrar Calificaciones -->
+    <div id="calificacionMostrar" class="container" >
+      <h2>Comentarios</h2>
+      <!-- Mostrar una Calificacion -->
+      <div id="mostrarComentarios">  
+      </div>
+    </div>
+
+
+
+
+    <!-- Productos relacionados -->
+    <div class="container mt-2">
+      <h2>Productos Relacionados</h2>
+      <div id="related" class="row">
+      </div>
+    </div>
+  </main>    
+</div>
+
+</div>
   <footer class="text-muted">
     <div class="container">
       <p class="float-end">
