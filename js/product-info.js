@@ -120,6 +120,7 @@ function displayProduct(producto, idProducto){
               <p class="col fs-3 text" >Vendidos: ${producto.soldCount}</p>
             </div>
           <p class="fs-5 text text-start mt-5">${producto.description}</p>
+          <button id="comprar-btn" class="btn btn-success mt-3">Comprar</button>
         </div>
       </div>
     </div>`;
