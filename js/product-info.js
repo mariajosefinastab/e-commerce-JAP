@@ -25,6 +25,8 @@ document.getElementById("comprar-btn").addEventListener("click", function() {
         cantidad: 1
       };
 
+      addCarrito(productoComprado);
+  
       window.location.href = "cart.html";
     });
 
