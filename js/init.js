@@ -27,15 +27,22 @@ function getCarrito(){ //devuelve todos los elementos del carrito
   return carrito.items;
 }
 
-function addCarrito(productoComprado) { // agrega un producto al carrito y actualiza localstorage
-  let existingItem = carrito.items.find(item => item.id === productoComprado.id);
-
-  if(existingItem) {
-    existingItem.cantidad += 1;
+function addCarrito(productoComprado) {
+  if (!localStorage.getItem("carrito")) {
+    carrito = { items: [] }; 
   } else {
-    carrito.items.push(productoComprado);
+    carrito = JSON.parse(localStorage.getItem("carrito")); // carga carrito existente
   }
 
+  let existingItem = carrito.items.find(item => item.id === productoComprado.id);
+
+  if (existingItem) {
+    existingItem.cantidad += 1; 
+  } else {
+    carrito.items.push(productoComprado); // + nuevo producto al carrito
+  }
+
+  // Actualizar el localStorage
   localStorage.setItem("carrito", JSON.stringify(carrito));
 }
 
