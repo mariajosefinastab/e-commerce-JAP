@@ -14,19 +14,19 @@ document.addEventListener("DOMContentLoaded", () => {
       displayRelated(producto);
 
       //Funcionalidad botón
-      document.getElementById("comprar-btn").addEventListener("click", function() {
-        const productoComprado = {
-          nombre: producto.name,
-          descripcion: producto.description,
-          precio: producto.currency + " " + producto.cost,
-          vendidos: producto.soldCount,
-          imagen: producto.images[0]
-        };
+document.getElementById("comprar-btn").addEventListener("click", function() {
+      const productoComprado = {
+        id: producto.id,
+        nombre: producto.name,
+        descripcion: producto.description,
+        precio: producto.currency + " " + producto.cost,
+        vendidos: producto.soldCount,
+        imagen: producto.images[0],
+        cantidad: 1
+      };
 
-        localStorage.setItem("productoComprado", JSON.stringify(productoComprado));
-
-        window.location.href = "cart.html";
-      });
+      window.location.href = "cart.html";
+    });
 
 
     } else {
