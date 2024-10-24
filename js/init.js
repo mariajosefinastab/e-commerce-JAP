@@ -22,6 +22,9 @@ let defaultUser={
   }
 }
 
+//Agregar otro elemento que sea carrito para guardar el elemento //id del producto, cantidad, etc
+//Y hacer función getCarrito, que devuelva todo el carrito, y otra addCarrito que le paso el productoComprado y lo agrega, tener en cuenta que si tengo más de una banana sea banana = "; y no banana banana
+
 document.addEventListener("DOMContentLoaded", ()=>{
   user = getUser();
   if(document.body.className != user.theme){
