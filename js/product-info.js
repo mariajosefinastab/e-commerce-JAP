@@ -12,6 +12,23 @@ document.addEventListener("DOMContentLoaded", () => {
       producto = result.data;
       displayProduct(producto, idProducto);
       displayRelated(producto);
+
+      //Funcionalidad botón
+      document.getElementById("comprar-btn").addEventListener("click", function() {
+        const productoComprado = {
+          id: producto.id,
+          nombre: producto.name,
+          descripcion: producto.description,
+          precio: producto.currency + " " + producto.cost,
+          vendidos: producto.soldCount,
+          imagen: producto.images[0],
+          cantidad: 1
+        };
+        addCarrito(productoComprado);
+        window.location.href = "cart.html";
+      });
+
+
     } else {
       alert("Error al cargar contenido");
     }
@@ -224,25 +241,5 @@ document.addEventListener("DOMContentLoaded", ()=>{
   });
 
 })
-
-
-document.getElementById("user-email").addEventListener("click", function(event) {
-  //event.preventDefault(); // Evita el comportamiento por defecto del enlace
-  var dropdown = document.getElementById("dropdown-menu");
-  dropdown.classList.toggle("show");
-});
-
-// Cierra el menú si se hace clic fuera del mismo
-window.onclick = function(event) {
-  if (!event.target.matches('#user-email')) {
-      var dropdowns = document.getElementsByClassName("dropdown-menu");
-      for (var i = 0; i < dropdowns.length; i++) {
-          var openDropdown = dropdowns[i];
-          if (openDropdown.classList.contains('show')) {
-              openDropdown.classList.remove('show');
-          }
-      }
-  }
-}
 
 

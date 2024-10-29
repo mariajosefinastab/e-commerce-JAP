@@ -22,6 +22,10 @@ let defaultUser={
   }
 }
 
+let carrito = {
+  items: []
+};
+
 //Agregar otro elemento que sea carrito para guardar el elemento //id del producto, cantidad, etc
 //Y hacer función getCarrito, que devuelva todo el carrito, y otra addCarrito que le paso el productoComprado y lo agrega, tener en cuenta que si tengo más de una banana sea banana = "; y no banana banana
 
@@ -33,6 +37,33 @@ document.addEventListener("DOMContentLoaded", ()=>{
 
 })
 
+//functiones carrito
+function getCarrito(){ 
+  //devuelve todos los elementos del carrito
+  if (!localStorage.getItem("carrito")) {
+    carrito = { items: [] }; 
+  } else {
+    carrito = JSON.parse(localStorage.getItem("carrito")); // carga carrito existente
+  }
+  return carrito;
+
+}
+
+function addCarrito(productoComprado) {
+  let carrito = getCarrito();
+  let existingItem = carrito.items.find(item => item.id === productoComprado.id);
+
+  if (existingItem) {
+    existingItem.cantidad += 1; 
+  } else {
+    carrito.items.push(productoComprado); // + nuevo producto al carrito
+  }
+  // Actualizar el localStorage
+  localStorage.setItem("carrito", JSON.stringify(carrito)); 
+}
+
+
+//funciones usuario
 function getUser(){
   let data = JSON.parse(localStorage.getItem(LOCALKEY));
   if(data == null){
@@ -106,4 +137,35 @@ function tema(){
   }
   console.log(user.theme)
   setUser(user);
+}
+
+
+/* Dropdown button y cerrar sesion */
+document.getElementById("user-email").addEventListener("click", function(event) {
+  //event.preventDefault(); // Evita el comportamiento por defecto del enlace
+  var dropdown = document.getElementById("dropdown-menu");
+  dropdown.classList.toggle("show");
+
+  document.getElementById("cerrar-sesion").addEventListener("click", (event)=>{
+      let email = localStorage.getItem("email");
+      email = ""
+      document.getElementById("user-email").innerHTML = ""
+      window.location = "login.html"
+      console.log(email);
+
+  });
+
+});
+
+// Cierra el menú si se hace clic fuera del mismo
+window.onclick = function(event) {
+  if (!event.target.matches('#user-email')) {
+      var dropdowns = document.getElementsByClassName("dropdown-menu");
+      for (var i = 0; i < dropdowns.length; i++) {
+          var openDropdown = dropdowns[i];
+          if (openDropdown.classList.contains('show')) {
+              openDropdown.classList.remove('show');
+          }
+      }
+  }
 }
