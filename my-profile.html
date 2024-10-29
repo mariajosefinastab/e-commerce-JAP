@@ -28,6 +28,7 @@
 </head>
 
 <body>
+
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark p-1">
     <div class="container">
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
@@ -37,32 +38,77 @@
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav w-100 justify-content-between">
           <li class="nav-item">
-            <a class="nav-link" href="index.html">Inicio</a>
+            <a class="nav-link active" href="index.html">Inicio</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="categories.html">Categorías</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="sell.html">Vender</a>
-          </li>
-          <li class="nav-item">
-            <a id="user-email" class="nav-item"></a>
+            <a class="nav-link active" href="sell.html">Vender</a>
           </li>
           <button class="switch" id="switch">
             <span><i class="fa-solid fa-moon"></i></i></span>
             <span><i class="fa-solid fa-sun"></i></span>
            </button>
+          <!--Menu desplegable-->
+          <li class="nav-item dropdown">
+            <a id="user-email" class="nav-link dropdown-toggle" href="#"></a>
+            <ul id="dropdown-menu" class="dropdown-menu">
+                <li><a class="dropdown-item" id="mi-carrito" href="cart.html">Mi carrito</a></li>
+                <li><a class="dropdown-item" id="mi-perfil" href="my-profile.html">Mi perfil</a></li>
+                <li><a class="dropdown-item" id="cerrar-sesion" href="#">Cerrar Sesión</a></li>
+            </ul>
+        </li>
         </ul>
       </div>
     </div>
   </nav>
-  <main>
-    <div class="container">
-      <div class="alert alert-danger text-center" role="alert">
-        <h4 class="alert-heading">Funcionalidad en desarrollo</h4>
+
+  <div class="container">
+    <div class="p-4">
+    <h2>Editar Perfil</h2>
+    <hr>
+    
+    <form id="registroForm" class="needs-validation" novalidate>
+      <div class="row justify-content-around">
+        <div class="col-md-6 align-self-start">
+          <label>Foto de perfil</label>
+          <div class="needsclick dz-clickable" id="file-upload">
+            <img id="profile" src="img/profile_photo.png" class="img-thumbnail" alt="...">
+            <input id="imgInput" type="file" acept="image/*"></input>
+          </div>
+          <div class="text-center">
+            <button id="guardarBtn" class="btn btn-primary" type="button">Guardar</button> 
+          </div>
+        </div>
+
+        <div class="col-md-6 justify-content-between">
+          <label for="nombre" class="form-label">Nombre*</label>
+          <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Nombre" required>
+          <div class="invalid-feedback" id="nombreError">Debe completar el campo</div>
+
+          <label for="segundoNombre" class="form-label">Segundo nombre</label>
+          <input type="text" class="form-control" id="segundoNombre" name="segundoNombre" placeholder="Segundo nombre">
+
+          <label for="apellido" class="form-label">Apellido*</label>
+          <input type="text" class="form-control" id="apellido" name="apellido" placeholder="Apellido" required>
+          <div class="invalid-feedback" id="apellidoError">Debe completar el campo</div>
+
+          <label for="segundoApellido" class="form-label">Segundo apellido</label>
+          <input type="text" class="form-control" id="segundoApellido" name="segundoApellido" placeholder="Segundo apellido">
+
+          <label for="email">E-mail*</label>
+          <input type="email" class="form-control" id="email" name="email" placeholder="email@email.com" required>
+          <div class="invalid-feedback" id="emailError">Debe completar el campo</div>
+
+          <label for="telefono" class="form-label">Teléfono de contacto</label>
+          <input type="tel" class="form-control" id="telefono" name="telefono" placeholder="Teléfono de contacto">
+        </div>
       </div>
-    </div>
-  </main>
+    </form>
+
+
+
   <footer class="text-muted">
     <div class="container">
       <p class="float-end">
@@ -71,8 +117,11 @@
       <p>Este sitio forma parte de <a href="https://jovenesaprogramar.edu.uy/" target="_blank">Jovenes a Programar</a></p>
     </div>
   </footer>
+  </div>
   <script src="js/bootstrap.bundle.min.js"></script>
+  <script src="js/dropzone.js"></script>
   <script src="js/init.js"></script>
+  <script src="js/sell.js"></script>
   <script src="js/my-profile.js"></script>
   <script src="js/auth.js"></script>
 </body>

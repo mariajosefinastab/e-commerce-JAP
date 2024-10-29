@@ -1,133 +1,78 @@
- HEAD
-// products.js
+const url = "https://japceibal.github.io/emercado-api/cats_products/";
 
-// Datos de productos en formato JSON
-const productos = [
-  {
-    "id": 50921,
-    "name": "Chevrolet Onix Joy",
-    "description": "Generación 2019, variedad de colores. Motor 1.0, ideal para ciudad.",
-    "cost": 13500,
-    "currency": "USD",
-    "soldCount": 14,
-    "image": "img/prod50921_1.jpg"
-  },
-  {
-    "id": 50922,
-    "name": "Fiat Way",
-    "description": "La versión de Fiat que brinda confort y a un precio accesible.",
-    "cost": 14500,
-    "currency": "USD",
-    "soldCount": 52,
-    "image": "img/prod50922_1.jpg"
-  },
-  {
-    "id": 50923,
-    "name": "Suzuki Celerio",
-    "description": "Un auto que se ha ganado la buena fama por su economía con el combustible.",
-    "cost": 12500,
-    "currency": "USD",
-    "soldCount": 25,
-    "image": "img/prod50923_1.jpg"
-  },
-  {
-    "id": 50924,
-    "name": "Peugeot 208",
-    "description": "El modelo de auto que se sigue renovando y manteniendo su prestigio en comodidad.",
-    "cost": 15200,
-    "currency": "USD",
-    "soldCount": 17,
-    "image": "img/prod50924_1.jpg"
-  },
-  {
-    "id": 50925,
-    "name": "Bugatti Chiron",
-    "description": "El mejor hiperdeportivo de mundo. Producción limitada a 500 unidades.",
-    "cost": 3500000,
-    "currency": "USD",
-    "soldCount": 0,
-    "image": "img/prod50925_1.jpg"
-  }
-];
-
-function mostrarProductos() {
-  const contenedor = document.getElementById('showProducts');
-  contenedor.innerHTML = ''; // Limpiar el contenedor antes de agregar productos
-  
-  productos.forEach(producto => {
-    const productoElemento = document.createElement('div');
-    productoElemento.classList.add('producto');
-    productoElemento.innerHTML = `
-      <div class="producto-img">
-        <img src="${producto.image}" alt="${producto.name}">
-      </div>
-      <h2>${producto.name}</h2>
-      <p>${producto.description}</p>
-      <p>Precio: ${producto.cost} ${producto.currency}</p>
-      <p>Vendidos: ${producto.soldCount}</p>
-      <button onclick="guardarIDProducto(${producto.id})">Seleccionar</button>
-    `;
-    contenedor.appendChild(productoElemento);
-  });
-}
-
-function guardarIDProducto(id) {
-  localStorage.setItem('idProducto', id);
-  // Redirigir a la página de información del producto
-  window.location.href = 'product-info.html';
-}
-
-// Mostrar productos al cargar la página
-document.addEventListener('DOMContentLoaded', mostrarProductos);
-
-
-const url = "https://japceibal.github.io/emercado-api/cats_products/101.json";
 //array con productos 
 let producto = [];
 //nombre de la categoría
 let catName="";
- d5419e8b738c456b25b46165eea36237d900473
 
 document.addEventListener("DOMContentLoaded", () => {
-  getJSONData(url).then(result => {
+  let idCat = localStorage.getItem("catID");
+  getJSONData(url+idCat+".json").then(result => {
     if (result.status === "ok") {
       productos = result.data.products;
       catName = result.data.catName;
       displayProducts(productos, catName);
+
+      //Buscador
+      document.getElementById("buscar").addEventListener("keyup", () => {
+        busquedaEnElMomento();
+      });
 
       // Filtros
       document.getElementById("filterBtn").addEventListener("click", () => {  //Toma click en filtro para aplicar las siguientes funciones
         const minPrice = parseFloat(document.getElementById("minPrice").value) || 0;  //Toma valor mínimo de campo de entrada y lo pasa a valor numérico, si no hay valor usa 0
         const maxPrice = parseFloat(document.getElementById("maxPrice").value) || Infinity;  //Toma valor máximo de campo de entrada y lo pasa a valor numérico, si no hay valor usa 0
         const filteredProducts = productos.filter(item => item.cost >= minPrice && item.cost <= maxPrice); //Filstra según rango de precios
-        displayProducts(filteredProducts, catName);
-      });
 
-      // Ordenación
-      document.getElementById("sortBy").addEventListener("change", (e) => {
-        const sortValue = e.target.value;
+        //Ordenacion
+        const sortValue = document.getElementById("sortBy").value;
         let sortedProducts;
-
         switch (sortValue) {
           case "priceAsc":
-            sortedProducts = [...productos].sort((a, b) => a.cost - b.cost);
+            sortedProducts = [...filteredProducts].sort((a, b) => a.cost - b.cost);
             break;
           case "priceDesc":
-            sortedProducts = [...productos].sort((a, b) => b.cost - a.cost);
+            sortedProducts = [...filteredProducts].sort((a, b) => b.cost - a.cost);
             break;
           case "soldCountDesc":
-            sortedProducts = [...productos].sort((a, b) => b.soldCount - a.soldCount); //Vendidos descendente
+            sortedProducts = [...filteredProducts].sort((a, b) => b.soldCount - a.soldCount); //Vendidos descendente
             break;
           default:
-            sortedProducts = productos;
+            sortedProducts = filteredProducts;
         }
+
         displayProducts(sortedProducts, catName);
       });
+
     } else {
       alert("Error al cargar contenido");
     }
   });
+
+  document.getElementById("cerrar-sesion").addEventListener("click", (event)=>{
+    let email = localStorage.getItem("email");
+    email = ""
+    document.getElementById("user-email").innerHTML = ""
+    window.location = "login.html"
+    console.log(email);
+
 });
+
+});
+
+//Función de búsqueda
+function busquedaEnElMomento() {
+  var filtro = document.getElementById("buscar").value.toUpperCase(); //Toma lo que se escribió en el input y hace que no sea sensible a mayúsculas/minúsculas
+  var filas = document.querySelectorAll("#showProducts .fila"); //Selecciona todos los productos que se muestran
+  filas.forEach(function(fila) { //Itera sobre cada producto 
+    var nombreProducto = fila.querySelector(".info p.fs-2").textContent.toUpperCase(); //fila.querySelector(".info p.fs-2") busca dentro de cada fila el elemento con la clase .fs-2 (que parece contener el nombre del producto) y está dentro de un contenedor con la clase .info
+    if (nombreProducto.indexOf(filtro) > -1) { //Verifica si el nombre del rpoducto está en el filtro
+      fila.style.display = "";  //Si coincide lo muestra
+    } else {
+      fila.style.display = "none"; //Sino no lo muestra
+    }
+  });
+}
 
 
 //Funcion recibe el array de productos y lo muestra en pantalla.
@@ -150,7 +95,7 @@ function displayProducts(listado, catName){
   listado.forEach(item => {
     content += ` 
     <!-- Productos -->
-    <div class="container">
+    <div class="container list-group-item list-group-item-action cursor-active" onclick="guardarIDProducto(${item.id})">
       <div class="row mb-3 text-center fila">
         <!--imagen-->
         <div class="col">
@@ -177,10 +122,34 @@ function displayProducts(listado, catName){
   document.getElementById("showProducts").innerHTML = content; //Saco +
 }
 
+function guardarIDProducto(id) {
+  localStorage.setItem('idProducto', id);
+  // Redirigir a la página de información del producto
+  window.location.href = 'product-info.html';
+}
 
 
 
+//----------------------------------Menu desplegable----------------------------------
 
 
+document.getElementById("user-email").addEventListener("click", function(event) {
+  //event.preventDefault(); // Evita el comportamiento por defecto del enlace
+  var dropdown = document.getElementById("dropdown-menu");
+  dropdown.classList.toggle("show");
+});
+
+// Cierra el menú si se hace clic fuera del mismo
+window.onclick = function(event) {
+  if (!event.target.matches('#user-email')) {
+      var dropdowns = document.getElementsByClassName("dropdown-menu");
+      for (var i = 0; i < dropdowns.length; i++) {
+          var openDropdown = dropdowns[i];
+          if (openDropdown.classList.contains('show')) {
+              openDropdown.classList.remove('show');
+          }
+      }
+  }
+}
 
 
