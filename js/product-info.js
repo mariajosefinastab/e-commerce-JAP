@@ -19,7 +19,8 @@ document.addEventListener("DOMContentLoaded", () => {
           id: producto.id,
           nombre: producto.name,
           descripcion: producto.description,
-          precio: producto.currency + " " + producto.cost,
+          precio: producto.cost,
+          moneda: producto.currency,
           vendidos: producto.soldCount,
           imagen: producto.images[0],
           cantidad: 1
@@ -85,7 +86,7 @@ function displayProduct(producto, idProducto){
         <!-- Productos -->
         <div class="container">
           <div class="row">
-            <div class="col">
+            <div class="col-md-8 col-sm-12">
             <! -- carousel -->
             <div id="carouselImagenes" class="carousel slide">
               <div id="carousel" class="carousel-inner">`;
@@ -108,7 +109,7 @@ function displayProduct(producto, idProducto){
             </div>
             </div>
             <!-- Segunda columna -->
-            <div class="col-4">
+            <div class="col-md-4 col-sm-12">
             <!--Nombre y descripcion-->
             <div class='my-5'>
               <h2 class="fs-1 text">${producto.name}</h2>
@@ -118,8 +119,9 @@ function displayProduct(producto, idProducto){
               <p class="col fs-3 text">$${producto.cost}${producto.currency}</p>
               <!--Unidades vendidas-->
               <p class="col fs-3 text" >Vendidos: ${producto.soldCount}</p>
+              <p class="fs-5 text text-start mt-5">${producto.description}</p>
+              <button id="comprar-btn" class="btn btn-success mt-3">Comprar</button>
             </div>
-          <p class="fs-5 text text-start mt-5">${producto.description}</p>
         </div>
       </div>
     </div>`;

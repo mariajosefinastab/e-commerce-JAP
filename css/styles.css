@@ -350,11 +350,14 @@ span {
   }
 
 .dark #cat-list-container,
-.dark .form-control{
+.dark .form-control,
+.dark .table,
+.dark {
   background-color: #212529;
   color: #fff
 }
-.dark .list-group-item{
+.dark .list-group-item,
+.dark .card{
   background-color: #212529;
   border: 1px solid rgba(255, 255, 255, .125);
   color: #fff

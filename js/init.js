@@ -5,8 +5,11 @@ const PRODUCT_INFO_URL = "https://japceibal.github.io/emercado-api/products/";
 const PRODUCT_INFO_COMMENTS_URL = "https://japceibal.github.io/emercado-api/products_comments/";
 const CART_INFO_URL = "https://japceibal.github.io/emercado-api/user_cart/";
 const CART_BUY_URL = "https://japceibal.github.io/emercado-api/cart/buy.json";
+const COTIZACION_DOLAR_URL = "https://uy.dolarapi.com/v1/cotizaciones/usd";
 const EXT_TYPE = ".json";
 const LOCALKEY = "ecomercejap";
+let ADOLAR = 1;
+let APESO = 1;
 
 let defaultUser={
   "user":{
@@ -34,8 +37,8 @@ document.addEventListener("DOMContentLoaded", ()=>{
   if(document.body.className != user.theme){
     tema();
   }
-
-})
+  badgeCarrito();
+});
 
 //functiones carrito
 function getCarrito(){ 
@@ -46,7 +49,6 @@ function getCarrito(){
     carrito = JSON.parse(localStorage.getItem("carrito")); // carga carrito existente
   }
   return carrito;
-
 }
 
 function addCarrito(productoComprado) {
@@ -57,6 +59,20 @@ function addCarrito(productoComprado) {
     existingItem.cantidad += 1; 
   } else {
     carrito.items.push(productoComprado); // + nuevo producto al carrito
+  }
+  // Actualizar el localStorage
+  localStorage.setItem("carrito", JSON.stringify(carrito)); 
+}
+
+function removeCarrito(productoComprado) {
+  let carrito = getCarrito();
+  let existingItem = carrito.items.find(item => item.id === productoComprado.id);
+
+  if (existingItem && existingItem.cantidad>1){
+    existingItem.cantidad -= 1; 
+  } else {
+    // - eliminar producto carrito
+    carrito.items = carrito.items.filter(item => item.id !== productoComprado.id);
   }
   // Actualizar el localStorage
   localStorage.setItem("carrito", JSON.stringify(carrito)); 
@@ -81,7 +97,6 @@ function setUser(usuario){
   localStorage.setItem(LOCALKEY,JSON.stringify(data));
   return true;
 }
-
 
 
 let showSpinner = function(){
@@ -116,8 +131,6 @@ let getJSONData = function(url){
         return result;
     });
 }
-
-
 
 /* Cambiar tema */
 const btnSwitch = document.querySelector('#switch'); 
@@ -168,4 +181,23 @@ window.onclick = function(event) {
           }
       }
   }
+}
+
+
+//Cambio de moneda
+async function cotizacionDolar(){
+  let cambio =  await getJSONData(COTIZACION_DOLAR_URL);
+  ADOLAR = cambio.data.compra;
+  APESO =  cambio.data.venta;
+};
+
+//Badge
+function badgeCarrito(){
+  let pCarrito = document.getElementById("badgeCarrito");
+  let carrito = getCarrito();
+  let cantidadCarrito = 0;
+  carrito.items.forEach(element => {
+  cantidadCarrito += element.cantidad;
+  });
+  pCarrito.textContent = cantidadCarrito;
 }

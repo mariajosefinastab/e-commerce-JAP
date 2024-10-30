@@ -9,6 +9,7 @@
   <link href="css/bootstrap.min.css" rel="stylesheet">
   <link href="css/font-awesome.min.css" rel="stylesheet">
   <link href="css/styles.css" rel="stylesheet">
+  <link rel="stylesheet" href="css/cart.css">
   <script src="https://kit.fontawesome.com/8e090f806c.js" crossorigin="anonymous"></script>
 </head>
 
@@ -40,7 +41,7 @@
           <li class="nav-item dropdown">
             <a id="user-email" class="nav-link dropdown-toggle" href="#"></a>
             <ul id="dropdown-menu" class="dropdown-menu">
-                <li><a class="dropdown-item" id="mi-carrito" href="cart.html">Mi carrito</a></li>
+                <li><a class="dropdown-item" id="mi-carrito" href="cart.html">Mi carrito<p id="badgeCarrito" class="badge text-bg-secondary bg-danger position-absolute top-0 start-100 translate-middle"></p></a></li>
                 <li><a class="dropdown-item" id="mi-perfil" href="my-profile.html">Mi perfil</a></li>
                 <li><a class="dropdown-item" id="cerrar-sesion" href="#">Cerrar Sesión</a></li>
             </ul>
@@ -50,11 +51,29 @@
     </div>
   </nav>
   <main>
-    <div class="container">
-      <div class="alert alert-danger text-center" role="alert">
-        <h4 class="alert-heading">Funcionalidad en desarrollo</h4>
+    <div class="container">  
+      <h1>Carrito</h1>
+      <table class="table">
+          <thead>
+              <tr>
+                  <th>Item</th>
+                  <th>Precio</th>
+                  <th>Cantidad</th>
+                  <th>Total</th>
+              </tr>
+          </thead>
+          <!------------------Un producto en el carrito---------------->
+          <tbody id="cart-product" class="tbody-container">
+          </tbody>
+          <!------------------------------------------------------------>
+      </table>
+      <div class="text-end row container">
+        <div>
+          <button id="comprarBtn" class="btn btn-success col d-flex flex-column ">Comprar</button>
+        </div>
       </div>
-    </div>
+      
+  </div>
   </main>
   <footer class="text-muted">
     <div class="container">
