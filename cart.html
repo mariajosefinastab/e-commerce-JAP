@@ -40,18 +40,126 @@
                 <li><a class="dropdown-item" id="cerrar-sesion" href="#">Cerrar Sesión</a></li>
             </ul>
         </li>
-
-
         </ul>
       </div>
     </div>
   </nav>
   <main>
-    <div class="container">
-      <div class="alert alert-danger text-center" role="alert">
-        <h4 class="alert-heading">Funcionalidad en desarrollo</h4>
+
+
+    <div class="container">   
+
+      <h1>Carrito</h1>
+      <table class="table">
+          <thead>
+              <tr>
+                  <th>Producto</th>
+                  <th>Precio</th>
+                  <th>Cantidad</th>
+                  <th>Total</th>
+              </tr>
+          </thead>
+          <tbody>
+              </tbody>
+      </table>
+
+      <div class="row product-row">
+        <div class="col-md-3">
+          <img src="ruta_a_la_imagen.jpg" alt="Nombre del producto" class="img-fluid">
+        </div>
+        <div class="col-md-6">
+          <h6>Nombre del producto</h6>
+          <p>Descripción del producto</p>
+          <div class="quantity-container">
+            <input type="number" class="form-control text-center" value="1" min="1">
+            <div class="quantity-buttons">
+              <button class="btn btn-decrement">-</button>
+              <button class="btn btn-increment">+</button>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-3 text-end">
+          <span class="price">$999.99</span>
+        </div>
       </div>
+
+      <div class="row">
+        <div class="col-md-6">
+            <h3>Tipo de envío:</h3>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="shipping" id="shipping1" value="premium">
+                <label class="form-check-label" for="shipping1">
+                    Premium (2 a 5 días)
+                </label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="shipping" id="shipping2" value="express">
+                <label class="form-check-label" for="shipping2">
+                    Express (5 a 8 días)
+                </label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="shipping" id="shipping3" value="standard">
+                <label class="form-check-label" for="shipping3">
+                    Standard (12 a 15 días)
+                </label>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <h3>Dirección de envío:</h3>
+            <div class="mb-3">
+                <label for="departamento" class="form-label">Departamento</label>
+                <input type="text" class="form-control" id="departamento">   
+    
+            </div>
+            <div class="mb-3">
+                <label for="localidad" class="form-label">Localidad</label>
+                <input type="text" class="form-control" id="localidad">   
+    
+            </div>
+            <div class="mb-3">
+                <label for="calle" class="form-label">Calle</label>
+                <input type="text" class="form-control" id="calle">
+            </div>
+            <div class="mb-3">
+                <label for="numero" class="form-label">Número</label>   
+    
+                <input type="text" class="form-control" id="numero">
+            </div>
+            <div class="mb-3">
+                <label for="esquina"   
+     class="form-label">Esquina</label>
+                <input type="text" class="form-control" id="esquina">
+            </div>
+        </div>
     </div>
+    
+    <div class="row">
+        <div class="col-md-12">
+            <h3>Forma de pago:</h3>
+            <select class="form-select" aria-label="Default select example">
+                <option selected>Selecciona una forma de pago</option>
+                <option value="1">Tarjeta de crédito</option>
+                <option value="2">Tarjeta de débito</option>
+                <option value="3">PayPal</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-12">
+          <h3>Costos:</h3>
+          <ul>
+              <li>Subtotal: <span id="subtotal">$999.99</span></li>
+              <li>Costo de envío: <span id="shipping-cost">$999.99</span></li>
+              <li>Total: <span id="total">$999.99</span></li>
+          </ul>
+          <button class="btn btn-primary btn-lg" id="comprar">COMPRAR</button>
+      </div>
+  </div>
+
+
+  </div>
   </main>
   <footer class="text-muted">
     <div class="container">

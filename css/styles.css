@@ -288,3 +288,44 @@ a.custom-card:hover {
 .star-rating label:hover ~ label {
   color: #ccc;
 }
+
+.product-row {
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid #ccc;
+  padding: 10px;
+}
+
+.product-info {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start; 
+}
+
+.price {
+  font-weight: bold;
+}
+
+.quantity-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.quantity-input {
+  width: 50px; 
+  text-align: center;
+}
+
+.quantity-buttons {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.quantity-buttons button {
+  width: 20px; 
+  height: 20px;
+  border-radius: 50%;
+}
+
