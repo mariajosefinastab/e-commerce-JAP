@@ -47,8 +47,7 @@
   <main>
 
 
-    <div class="container">   
-
+    <div class="container">
       <h1>Carrito</h1>
       <table class="table">
           <thead>
@@ -60,101 +59,100 @@
               </tr>
           </thead>
           <tbody>
+              <tr>
+                  <td>
+                      <div class="row">
+                          <div class="col-md-3">
+                              <img src="ruta_a_la_imagen.jpg" alt="Nombre del producto" class="img-fluid">
+                          </div>
+                          <div class="col-md-6">
+                              <h6>Nombre del producto</h6>
+                              <p>Descripción del producto</p>
+                          </div>
+                      </div>
+                  </td>
+                  <td>$999.99</td>
+                  <td>
+                      <div class="quantity-container">
+                          <input type="number" class="form-control text-center" value="1" min="1">
+                      </div>
+                  </td>
+                  <td>$999.99</td>
+              </tr>
               </tbody>
       </table>
-
-      <div class="row product-row">
-        <div class="col-md-3">
-          <img src="ruta_a_la_imagen.jpg" alt="Nombre del producto" class="img-fluid">
-        </div>
-        <div class="col-md-6">
-          <h6>Nombre del producto</h6>
-          <p>Descripción del producto</p>
-          <div class="quantity-container">
-            <input type="number" class="form-control text-center" value="1" min="1">
-            <div class="quantity-buttons">
-              <button class="btn btn-decrement">-</button>
-              <button class="btn btn-increment">+</button>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-3 text-end">
-          <span class="price">$999.99</span>
-        </div>
-      </div>
-
+  
       <div class="row">
         <div class="col-md-6">
-            <h3>Tipo de envío:</h3>
-            <div class="form-check">
-                <input class="form-check-input" type="radio" name="shipping" id="shipping1" value="premium">
-                <label class="form-check-label" for="shipping1">
-                    Premium (2 a 5 días)
-                </label>
-            </div>
-            <div class="form-check">
-                <input class="form-check-input" type="radio" name="shipping" id="shipping2" value="express">
-                <label class="form-check-label" for="shipping2">
-                    Express (5 a 8 días)
-                </label>
-            </div>
-            <div class="form-check">
-                <input class="form-check-input" type="radio" name="shipping" id="shipping3" value="standard">
-                <label class="form-check-label" for="shipping3">
-                    Standard (12 a 15 días)
-                </label>
-            </div>
+          <h4>Tipo de envío:</h4>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="shipping" id="premium" value="premium">
+            <label class="form-check-label" for="premium">
+              Premium (2 a 5 días)
+            </label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="shipping" id="express" value="express">
+            <label class="form-check-label" for="express">
+              Express (5 a 8 días)
+            </label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="shipping" id="standard" value="standard" checked>
+            <label class="form-check-label" for="standard">
+              Standard (12 a 15 días)
+            </label>
+          </div>
         </div>
         <div class="col-md-6">
-            <h3>Dirección de envío:</h3>
-            <div class="mb-3">
-                <label for="departamento" class="form-label">Departamento</label>
-                <input type="text" class="form-control" id="departamento">   
+          <h4>Dirección de envío:</h4>
+          <div class="form-group">
+            <label for="department">Departamento:</label>
+            <input type="text" class="form-control" id="department" name="department">   
     
-            </div>
-            <div class="mb-3">
-                <label for="localidad" class="form-label">Localidad</label>
-                <input type="text" class="form-control" id="localidad">   
+          </div>
+          <div class="form-group">
+            <label for="city">Localidad:</label>
+            <input type="text" class="form-control" id="city" name="city">
+          </div>
+          <div class="form-group">
+            <label for="street">Calle:</label>
+            <input type="text" class="form-control" id="street" name="street">
+          </div>
+          <div class="form-group">
+            <label for="number">Número:</label>   
     
-            </div>
-            <div class="mb-3">
-                <label for="calle" class="form-label">Calle</label>
-                <input type="text" class="form-control" id="calle">
-            </div>
-            <div class="mb-3">
-                <label for="numero" class="form-label">Número</label>   
-    
-                <input type="text" class="form-control" id="numero">
-            </div>
-            <div class="mb-3">
-                <label for="esquina"   
-     class="form-label">Esquina</label>
-                <input type="text" class="form-control" id="esquina">
-            </div>
+            <input type="text" class="form-control" id="number" name="number">
+          </div>
+          <div class="form-group">
+            <label   
+     for="corner">Esquina:</label>
+            <input type="text" class="form-control" id="corner" name="corner">
+          </div>
         </div>
-    </div>
-    
-    <div class="row">
-        <div class="col-md-12">
-            <h3>Forma de pago:</h3>
-            <select class="form-select" aria-label="Default select example">
-                <option selected>Selecciona una forma de pago</option>
-                <option value="1">Tarjeta de crédito</option>
-                <option value="2">Tarjeta de débito</option>
-                <option value="3">PayPal</option>
-            </select>
-        </div>
-    </div>
-
-    <div class="row">
-      <div class="col-md-12">
-          <h3>Costos:</h3>
-          <ul>
-              <li>Subtotal: <span id="subtotal">$999.99</span></li>
-              <li>Costo de envío: <span id="shipping-cost">$999.99</span></li>
-              <li>Total: <span id="total">$999.99</span></li>
-          </ul>
-          <button class="btn btn-primary btn-lg" id="comprar">COMPRAR</button>
+      </div>
+  
+      <div class="row">
+          <div class="col-md-12">   
+  
+              <h3>Forma de pago:</h3>
+              <select class="form-select" aria-label="Default select example">
+                  <option selected>Selecciona una forma de pago</option>
+                  <option value="1">Tarjeta de crédito</option>
+                  </select>
+          </div>
+      </div>
+  
+      <div class="row">
+          <div class="col-md-12">
+              <h3>Costos:</h3>
+              <ul>
+                  <li>Subtotal: <span id="subtotal">$999.99</span></li>
+                  <li>Costo de envío: <span id="shipping-cost">$999.99</span></li>
+                  <li>Total: <span id="total">$999.99</span></li>
+              </ul>
+              <button class="btn btn-primary btn-lg" id="comprar">COMPRAR</button>
+          </div>
       </div>
   </div>
 
@@ -184,3 +182,13 @@
 </body>
 
 </html>
+
+<!--      <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <button class="btn btn-outline-secondary" type="button" id="inputGroupFileAddon03">Button</button>
+        </div>
+        <div class="custom-file">
+          <input type="file" class="custom-file-input" id="inputGroupFile03" aria-describedby="inputGroupFileAddon03">
+          <label class="custom-file-label" for="inputGroupFile03">Choose file</label>
+        </div>
+      </div> -->
