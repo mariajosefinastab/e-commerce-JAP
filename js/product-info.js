@@ -14,19 +14,21 @@ document.addEventListener("DOMContentLoaded", () => {
       displayRelated(producto);
 
       //Funcionalidad botón
-      document.getElementById("comprar-btn").addEventListener("click", function() {
-        const productoComprado = {
-          nombre: producto.name,
-          descripcion: producto.description,
-          precio: producto.currency + " " + producto.cost,
-          vendidos: producto.soldCount,
-          imagen: producto.images[0]
-        };
+document.getElementById("comprar-btn").addEventListener("click", function() {
+      const productoComprado = {
+        id: producto.id,
+        nombre: producto.name,
+        descripcion: producto.description,
+        precio: producto.currency + " " + producto.cost,
+        vendidos: producto.soldCount,
+        imagen: producto.images[0],
+        cantidad: 1
+      };
 
-        localStorage.setItem("productoComprado", JSON.stringify(productoComprado));
-
-        window.location.href = "cart.html";
-      });
+      addCarrito(productoComprado);
+  
+      window.location.href = "cart.html";
+    });
 
 
     } else {
@@ -120,6 +122,7 @@ function displayProduct(producto, idProducto){
               <p class="col fs-3 text" >Vendidos: ${producto.soldCount}</p>
             </div>
           <p class="fs-5 text text-start mt-5">${producto.description}</p>
+          <button id="comprar-btn" class="btn btn-success mt-3">Comprar</button>
         </div>
       </div>
     </div>`;

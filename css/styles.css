@@ -289,6 +289,11 @@ a.custom-card:hover {
   color: #ccc;
 }
 
+<<<<<<< HEAD
+=======
+///////////////////////////////////////////////////////////////////////
+
+>>>>>>> 5c16b6866c364ee3a9c0d9a90f02721011ade874
 .product-row {
   display: flex;
   align-items: center;
@@ -319,6 +324,7 @@ a.custom-card:hover {
   background: #D9D9D9;
 }
 
+<<<<<<< HEAD
 h6 {
   font-family: 'Noto Sans';
   font-style: normal;
@@ -337,3 +343,23 @@ p {
   color: #666666;
 
 }
+=======
+/* .quantity-input {
+  width: 50px; 
+  text-align: center;
+  background: #D9D9D9;
+}
+
+.quantity-buttons {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.quantity-buttons button {
+  width: 20px; 
+  height: 20px;
+  border-radius: 50%;
+} */
+
+>>>>>>> 5c16b6866c364ee3a9c0d9a90f02721011ade874
