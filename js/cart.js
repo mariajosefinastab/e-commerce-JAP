@@ -1,8 +1,21 @@
+//Costos
+let subtotal = 0;
+let envio = 0;
+let total = 0;
+
 document.addEventListener("DOMContentLoaded", async () => {
     //Cotizacion dolar.
     await cotizacionDolar();
-    const carrito = getCarrito();
+    const carrito = await getCarrito();
     displayCarrito(carrito);
+
+    //forma pago
+    document.getElementById("formaPago").addEventListener("change", medioPago);
+
+    //envio
+    const radios = document.querySelectorAll('input[name="shipping"]');
+    radios.forEach(radio => {radio.addEventListener('change', formaEnvio)});
+    formaEnvio();
 });
 
 // Función que arma el contenido
@@ -56,14 +69,17 @@ function displayCarrito(carrito) {
         <tr class="mb-3 text-center fila">
             <td colspan="4">
             <div class="text-end row container">
-                <p><strong>Total:</strong></p>
+                <p><strong>Sub Total:</strong></p>
                 <p class="col text-end fs-3">$${precioFinal}</p>
             </div>
             </td>
         </tr>
         `
+        subtotal = precioFinal;
         contenedor.innerHTML += row;
     }
+    //Muestro info de pago y envio.
+    displayCheckout(carrito);
 }
 
 
@@ -83,4 +99,78 @@ function actualizarCarrito(idProducto,sumaresta){
         }
     }
   });      
+}
+
+function medioPago(){
+    console.log("medioPago().");
+    let medio = document.getElementById("formaPago").value;
+    let form = "";
+    switch(medio){
+        case "credito":
+            form = `<div class="input-group mb-3">
+              <span class="input-group-text" id="basic-addon1">Nombre</span>
+              <input type="text" class="form-control" placeholder="Nombre Titular" aria-label="cardName" aria-describedby="basic-addon1" required>
+            </div>
+            <div class="input-group mb-3">
+              <span class="input-group-text" id="basic-addon1">Número</span>
+              <input type="text" class="form-control" placeholder="0123 0123 0123 0123" aria-label="cardNum" aria-describedby="basic-addon1" required>
+            </div>
+            <div class="input-group mb-3">
+              <span class="input-group-text">Validez</span>
+              <input type="text" class="form-control" placeholder="01/24" aria-label="cardValid" required>
+              <span class="input-group-text">CVV</span>
+              <input type="text" class="form-control" placeholder="XXX" aria-label="Server" required>
+            </div`;
+        break;
+        case "bancaria":
+            form = `<ul class="list-group">
+              <li class="list-group-item">Banco Mentiritas SRL:</li>
+              <li class="list-group-item">Cuenta $: 5894133136889455625</li>
+              <li class="list-group-item">Enviar comprobante por whatsapp</li>
+            </ul>`;
+        break;
+    }
+
+    document.getElementById("medioPago").innerHTML = form;
+    displayCheckout(carrito);
+}
+
+function formaEnvio(){
+    console.log("formaEnvio():");
+    let selectedShipping = document.querySelector('input[name="shipping"]:checked').value;
+    switch(selectedShipping){
+        case "express":
+            envio = parseFloat((subtotal*0.07).toFixed(2));
+        break;
+        case "premium":
+            envio = parseFloat((subtotal*0.15).toFixed(2));
+        break;
+        case "standard":
+            envio = parseFloat((subtotal*0.05).toFixed(2));
+        break;
+    }
+    updateCostos();
+}
+
+function updateCostos(){
+    console.log("updateCostos():");
+    let costoSub = document.getElementById("subtotal");
+    let costoEnvio = document.getElementById("envio");
+    let costoTotal = document.getElementById("total");
+
+    total = subtotal+envio;
+
+    costoSub.innerHTML = `Subtotal: $ ${subtotal}`;
+    costoEnvio.innerHTML = `Envío: $ ${envio}`;
+    costoTotal.innerHTML = `Total: $ ${total}`;
+}
+
+function displayCheckout(carrito){
+    let contenedor = document.getElementById("checkoutContainer");
+    console.log("check:", carrito)
+    if(carrito.items.length === 0) {
+        contenedor.style.display ="none";
+    }else{
+        contenedor.style.display =""
+    }
 }
