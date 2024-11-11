@@ -333,7 +333,7 @@ a.custom-card:hover {
   color: #000;
   left: calc(100% - 35px); 
 }
-
+/*
 span {
   width: 30px;
   height: 30px;
@@ -342,7 +342,7 @@ span {
   background: none;
   color: #ffff;
 }
-
+*/
 /*Tema oscuro*/
 .dark { 
   background-color: #212529;
