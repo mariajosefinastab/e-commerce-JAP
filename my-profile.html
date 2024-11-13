@@ -64,7 +64,17 @@
       </div>
     </div>
   </nav>
-
+  <!-- toast -->
+  <div class="toast-container  position-fixed bottom-50 start-50 translate-middle p-3">
+    <div id="liveToast" class="toast bg-success" role="alert" aria-live="assertive" aria-atomic="true">
+      <div class="d-flex">
+        <div class="toast-body" id="toast-body">
+          Hello, world! This is a toast message.
+        </div>
+        <button type="button" class="btn-close me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+      </div>
+    </div>
+  </div>
   <div class="container">
     <div class="p-4">
     <h2>Editar Perfil</h2>
@@ -120,7 +130,6 @@
   <script src="js/bootstrap.bundle.min.js"></script>
   <script src="js/dropzone.js"></script>
   <script src="js/init.js"></script>
-  <script src="js/sell.js"></script>
   <script src="js/my-profile.js"></script>
   <script src="js/auth.js"></script>
 </body>

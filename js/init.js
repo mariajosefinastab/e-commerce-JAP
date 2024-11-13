@@ -25,6 +25,9 @@ let defaultUser={
   }
 }
 
+let defaultCarrito = {
+  items: []
+};
 let carrito = {
   items: []
 };
@@ -78,6 +81,10 @@ function removeCarrito(productoComprado) {
   localStorage.setItem("carrito", JSON.stringify(carrito)); 
 }
 
+//borro carrito
+function deleteCarrito(){
+  localStorage.setItem("carrito", JSON.stringify(defaultCarrito)); 
+}
 
 //funciones usuario
 function getUser(){
@@ -200,4 +207,30 @@ function badgeCarrito(){
   cantidadCarrito += element.cantidad;
   });
   pCarrito.textContent = cantidadCarrito;
+}
+
+
+//TOAST
+function displayToast(severity, message){
+  const toast = document.getElementById('liveToast');
+  let toastbody = document.getElementById('toast-body');
+  toastbody.innerHTML=message;
+  toast.className="toast";
+
+  switch(severity){
+    case "danger":
+      toast.classList.add("bg-danger");
+    break;
+    case "warning":
+      toast.classList.add("bg-warning");
+    break;
+    case "success":
+      toast.classList.add("bg-success");
+    break;
+    default:
+      toast.classList.add("bg-success");
+    break;
+  }
+  const toastBootstrap = bootstrap.Toast.getOrCreateInstance(toast);
+  toastBootstrap.show();
 }

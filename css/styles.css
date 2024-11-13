@@ -298,8 +298,8 @@ a.custom-card:hover {
   display: flex;
   outline: none;
   padding: 5px; 
-}*/
-
+}
+*/
 .switch {
   background: #343d5b;
   border-radius: 100px;
@@ -343,6 +343,8 @@ span {
   color: #ffff;
 }
 */
+
+
 /*Tema oscuro*/
 .dark { 
   background-color: #212529;

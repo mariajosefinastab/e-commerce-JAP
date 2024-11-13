@@ -21,10 +21,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
 
   button.addEventListener('click', function(event) {
-    console.log("entro funcion")
-
     event.preventDefault();
-
     let isValid = true;
 
 
@@ -63,14 +60,13 @@ document.addEventListener("DOMContentLoaded", function() {
       user.segundoApellido= segundoApellidoInput.value,
       user.email= emailInput.value,
       user.telefono= telefonoInput.value
-      }
 
-      // Guardar en almacenamiento local
       setUser(user);
-      //Guardo foto de perfil
       saveData();
-      //localStorage.setItem("userProfile", JSON.stringify(data));
-      alert("Perfil guardado con éxito.");
+      displayToast("success", "Perfil guardado con éxito.");
+    }else{
+      displayToast("danger", "Complete los campos.");
+    }
     
   });
 });
@@ -80,7 +76,6 @@ function displayProfilePhoto(){
   let user = getUser();
   let foto = user.foto;
   if(foto != ""){
-      console.log("entre");
       console.log(foto);
       //let imgInput = 
       document.getElementById("profile").src = foto;
@@ -93,8 +88,9 @@ function saveData(){
   let imgInput = document.getElementById("imgInput");
   if(imgInput.value != ""){
     if(imgInput.files[0].size > 1000000){
-        console.log("imagen grande viejo");
-        return false
+      displayToast("warning", "imagen muuy grande viejo");
+      //console.log("imagen grande viejo");
+      return false
     }
 
     const fr = new FileReader();
@@ -107,29 +103,3 @@ function saveData(){
     })
   }
 }
-
-
-
-
-//----------------------------------Menu desplegable----------------------------------
-
-
-document.getElementById("user-email").addEventListener("click", function(event) {
-    //event.preventDefault(); // Evita el comportamiento por defecto del enlace
-    var dropdown = document.getElementById("dropdown-menu");
-    dropdown.classList.toggle("show");
-});
-
-// Cierra el menú si se hace clic fuera del mismo
-window.onclick = function(event) {
-    if (!event.target.matches('#user-email')) {
-        var dropdowns = document.getElementsByClassName("dropdown-menu");
-        for (var i = 0; i < dropdowns.length; i++) {
-            var openDropdown = dropdowns[i];
-            if (openDropdown.classList.contains('show')) {
-                openDropdown.classList.remove('show');
-            }
-        }
-    }
-}
-
