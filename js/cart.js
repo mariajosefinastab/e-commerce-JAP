@@ -102,6 +102,7 @@ function actualizarCarrito(idProducto,sumaresta){
 }
 
 function medioPago(){
+
     console.log("medioPago().");
     let medio = document.getElementById("formaPago").value;
     let form = "";
@@ -158,7 +159,7 @@ function updateCostos(){
     let costoEnvio = document.getElementById("envio");
     let costoTotal = document.getElementById("total");
 
-    total = subtotal+envio;
+    const total = subtotal+envio;
 
     costoSub.innerHTML = `Subtotal: $ ${subtotal}`;
     costoEnvio.innerHTML = `Envío: $ ${envio}`;
@@ -174,3 +175,40 @@ function displayCheckout(carrito){
         contenedor.style.display =""
     }
 }
+// Funcion boton comprar 
+    document.getElementById("comprarBtn").addEventListener("click", () => {  
+        // Obtener la forma de pago seleccionada
+        const select = document.getElementById('formaPago');
+        const valorSeleccionado = select.value;
+    
+        // Obtener todos los inputs con la clase 'form-control'
+        const inputs = document.querySelectorAll('input.form-control');
+        const inputsArray = Array.from(inputs);
+        
+        let completados = true;  // Bandera para verificar si todos los campos están completos
+    
+        // Iteramos sobre cada input para verificar si está vacío
+        inputsArray.forEach(input => {
+            if (input.value.trim() === '') {  // Si el campo está vacío
+                completados = false;  // Cambiamos la bandera a falso si hay un campo vacío
+            }
+        });
+        let exito= `<div class="alert alert-success" role="alert">
+        Haz Realizado tu compra!! para volver a la pagina principal,haz click aqui<br><button type="button" class="btn btn-primary btn-sm" onclick="window.location.href='/index.html'">Volver</button>
+      </div>`
+        // Verificar si se seleccionó una forma de pago válida
+        if (valorSeleccionado === "credito" || valorSeleccionado === "bancaria") {
+            // Si todos los campos están completos
+            if (completados) {
+                document.getElementById("mensajeExito").innerHTML = exito;
+            } else {
+                alert("Falta completar campos, favor revise.");
+            }
+        } else {
+            alert("Por favor selecciona una forma de pago.");
+        }
+    });
+     
+
+    
+
