@@ -103,6 +103,14 @@ function saveData(){
     fr.addEventListener("load", ()=>{
         user.foto = fr.result;
         setUser(user);
+
+/*Funciones para borrar informacion del localStorage*/
+document.addEventListener("DOMContentLoaded", function() {
+  const logoutButton = document.getElementById('cerrar-sesion');  
+  logoutButton.addEventListener('click', function() {
+    localStorage.removeItem(LOCALKEY);  
+  });
+});
         displayProfilePhoto();
     })
   }
