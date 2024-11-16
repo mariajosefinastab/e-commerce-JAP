@@ -80,6 +80,8 @@ function displayCarrito(carrito) {
     }
     //Muestro info de pago y envio.
     displayCheckout(carrito);
+    //actualizo badge.
+    badgeCarrito();
 }
 
 
@@ -150,6 +152,7 @@ function formaEnvio(){
             envio = parseFloat((subtotal*0.05).toFixed(2));
         break;
     }
+    //actualizo costos
     updateCostos();
 }
 

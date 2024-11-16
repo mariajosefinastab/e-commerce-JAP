@@ -204,9 +204,10 @@ function badgeCarrito(){
   let carrito = getCarrito();
   let cantidadCarrito = 0;
   carrito.items.forEach(element => {
-  cantidadCarrito += element.cantidad;
+    cantidadCarrito += element.cantidad;
   });
   pCarrito.textContent = cantidadCarrito;
+  console.log("badgeCarrito:", cantidadCarrito)
 }
 
 
