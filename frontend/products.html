@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>eMercado - Todo lo que busques está aquí</title>
+
+  <link href="https://fonts.googleapis.com/css?family=Raleway:300,300i,400,400i,700,700i,900,900i" rel="stylesheet">
+  <link href="css/font-awesome.min.css" rel="stylesheet">
+  <link href="css/bootstrap.min.css" rel="stylesheet">
+  <link href="css/styles.css" rel="stylesheet">
+  <link rel="stylesheet" href="css/products.css">
+  <script src="https://kit.fontawesome.com/8e090f806c.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark p-1">
+    <div class="container">
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav w-100 justify-content-between">
+          <li class="nav-item">
+            <a class="nav-link active" href="index.html">Inicio</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="categories.html">Categorías</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="sell.html">Vender</a>
+          </li>
+          <li>
+            <button class="switch" id="switch">
+              <span><i class="fa-regular fa-moon"></i></span>
+              <span><i class="fa-solid fa-sun"></i></span>
+            </button>
+          </li>
+          <!--Menu desplegable-->
+          <li class="nav-item dropdown">
+            <a id="user-email" class="nav-link dropdown-toggle" href="#"></a>
+            <ul id="dropdown-menu" class="dropdown-menu">
+                <li><a class="dropdown-item" id="mi-carrito" href="cart.html">Mi carrito<p id="badgeCarrito" class="badge text-bg-secondary bg-danger position-absolute top-0 start-100 translate-middle"></p></a></li>
+                <li><a class="dropdown-item" id="mi-perfil" href="my-profile.html">Mi perfil</a></li>
+                <li><a class="dropdown-item" id="cerrar-sesion" href="#">Cerrar Sesión</a></li>
+            </ul>
+        </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <main class="pb-5 container">
+    <div class="container mt-3">
+      <!-- Filtro de precio -->
+      <div class="row mb-3">
+        <div class="col">
+          <label for="minPrice">Precio mínimo:</label>
+          <input type="number" id="minPrice" class="form-control" placeholder="Precio mínimo">
+        </div>
+        <div class="col">
+          <label for="maxPrice">Precio máximo:</label>
+          <input type="number" id="maxPrice" class="form-control" placeholder="Precio máximo">
+        </div>
+        <div class="col">
+          <button id="filterBtn" class="btn btn-primary mt-4">Filtrar</button>
+        </div>
+      </div>
+      <!-- Ordenación -->
+      <div class="row mb-3">
+        <div class="col">
+          <label for="sortBy">Ordenar por:</label>
+          <select id="sortBy" class="form-control">
+            <option value="priceAsc">Precio Ascendente</option>
+            <option value="priceDesc">Precio Descendente</option>
+            <option value="soldCountDesc">Relevancia (Vendidos Descendente)</option>
+          </select>
+        </div>
+      </div>
+      <!--Buscador-->
+      <div class="row mb-3">
+        <div class="col">
+          <input type="text" class="form-control" id="buscar" onkeyup="busquedaEnElMomento()" placeholder="Buscar en tabla" title="Empieza a escribir para buscar">
+        </div>
+      </div>
+
+    <!-- Productos -->
+    <div id="showProducts" class="container">
+    </div>
+    </div>
+  </main>
+  <footer class="text-muted">
+    <div class="container">
+      <p class="float-end">
+      <a href="#">Volver arriba</a>
+      </p>
+      <p>Este sitio forma parte de <a href="https://jovenesaprogramar.edu.uy/" target="_blank">Jovenes a Programar</a></p>
+    </div>
+    </footer>
+    <div id="spinner-wrapper">
+      <div class="lds-ring">
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
+    </div>
+  <script src="js/bootstrap.bundle.min.js"></script>
+  <script src="js/init.js"></script>
+  <script src="js/products.js"></script>
+  <script src="js/auth.js"></script>
+</body>
+</html>
