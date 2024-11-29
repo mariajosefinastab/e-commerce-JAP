@@ -48,6 +48,9 @@ app.listen(port, () => {
 const app = express();
 const port = 3000;
 
+const cors = require("cors");
+app.use(cors());
+
 const categoriesRouter = require("./routes/categoriesRouter");
 app.use("/categories", categoriesRouter); 
 

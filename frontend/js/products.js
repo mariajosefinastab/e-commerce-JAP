@@ -1,4 +1,4 @@
-const url = "https://japceibal.github.io/emercado-api/cats_products/";
+const url = "http://localhost:3000/products/catproducts/";
 
 //array con productos 
 let producto = [];
@@ -7,10 +7,10 @@ let catName="";
 
 document.addEventListener("DOMContentLoaded", () => {
   let idCat = localStorage.getItem("catID");
-  getJSONData(url+idCat+".json").then(result => {
+  getJSONData(url+idCat).then(result => {
     if (result.status === "ok") {
-      productos = result.data.products;
-      catName = result.data.catName;
+      productos = result.data[0].products;
+      catName = result.data[0].catName;
       displayProducts(productos, catName);
 
       //Buscador
