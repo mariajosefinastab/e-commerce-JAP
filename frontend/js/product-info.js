@@ -1,5 +1,5 @@
 
-url="https://japceibal.github.io/emercado-api/products/"
+url = "http://localhost:3000/products/";
 
 let catName="";
 
@@ -7,9 +7,9 @@ document.addEventListener("DOMContentLoaded", () => {
   //let idCat =  localStorage.getItem('catID');
   let idProducto = localStorage.getItem('idProducto');
 
-  getJSONData(url+idProducto+".json").then(result => {
+  getJSONData(url+idProducto).then(result => {
     if (result.status === "ok") {
-      producto = result.data;
+      producto = result.data[0];
       displayProduct(producto, idProducto);
       displayRelated(producto);
 
@@ -34,27 +34,17 @@ document.addEventListener("DOMContentLoaded", () => {
       alert("Error al cargar contenido");
     }
   });
-  // Mostrar Comentarios 
 
-  getJSONData(PRODUCT_INFO_COMMENTS_URL+idProducto+".json").then(result => {
-    if (result.status === "ok") {
-      comentarios = result.data;
-      displayComments (comentarios,idProducto)
-    } else {
-      alert("Error al cargar contenido");
-    }
-  });
-  // Mostrar Comentarios 
+// Mostrar Comentarios 
+getJSONData(PRODUCT_INFO_COMMENTS_URL+idProducto).then(result => {
+  if (result.status === "ok") {
+    comentarios = result.data[0];
+    displayComments (comentarios,idProducto)
+  } else {
+    alert("Error al cargar contenido");
+  }
+});
 
-  getJSONData(PRODUCT_INFO_COMMENTS_URL+idProducto+".json").then(result => {
-    if (result.status === "ok") {
-      comentarios = result.data;
-      displayComments (comentarios,idProducto)
-    } else {
-      alert("Error al cargar contenido");
-    }
-  });
-  
   document.getElementById("cerrar-sesion").addEventListener("click", (event)=>{
     let email = localStorage.getItem("email");
     email = ""
