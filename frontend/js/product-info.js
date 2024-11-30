@@ -14,7 +14,7 @@ document.addEventListener("DOMContentLoaded", () => {
       displayRelated(producto);
 
       //Funcionalidad botón
-      document.getElementById("comprar-btn").addEventListener("click", function() {
+      document.getElementById("comprar-btn").addEventListener("click", async function() {
         const productoComprado = {
           id: producto.id,
           nombre: producto.name,
@@ -25,7 +25,7 @@ document.addEventListener("DOMContentLoaded", () => {
           imagen: producto.images[0],
           cantidad: 1
         };
-        addCarrito(productoComprado);
+        await addCarrito(productoComprado);
         window.location.href = "cart.html";
       });
 

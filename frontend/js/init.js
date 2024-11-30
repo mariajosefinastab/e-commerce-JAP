@@ -6,6 +6,8 @@ const PRODUCT_INFO_COMMENTS_URL = "http://localhost:3000/products/commentproduct
 const CART_INFO_URL = "https://japceibal.github.io/emercado-api/user_cart/";
 const CART_BUY_URL = "https://japceibal.github.io/emercado-api/cart/buy.json";
 const COTIZACION_DOLAR_URL = "https://uy.dolarapi.com/v1/cotizaciones/usd";
+const LOGIN_URL= "http://localhost:3000/login";
+const CART_URL = "http://localhost:3000/cart/"
 const EXT_TYPE = ".json";
 const LOCALKEY = "ecomercejap";
 let ADOLAR = 1;
@@ -21,7 +23,8 @@ let defaultUser={
     "email":"",
     "foto":"",
     "authenticated":"false",
-    "theme":""
+    "theme":"",
+    "access-token": ""
   }
 }
 
@@ -44,30 +47,40 @@ document.addEventListener("DOMContentLoaded", ()=>{
 });
 
 //functiones carrito
-function getCarrito(){ 
+async function getCarrito(){ 
+  console.log("getCarrito()")
   //devuelve todos los elementos del carrito
+  /*
   if (!localStorage.getItem("carrito")) {
     carrito = { items: [] }; 
   } else {
     carrito = JSON.parse(localStorage.getItem("carrito")); // carga carrito existente
   }
-  return carrito;
+
+  */
+  let carrito = await getJSONData(CART_URL);
+  console.log(carrito.data)
+  return carrito.data;
 }
 
-function addCarrito(productoComprado) {
-  let carrito = getCarrito();
+async function addCarrito(productoComprado) {
+  /*
+  let carrito = await getCarrito();
   let existingItem = carrito.items.find(item => item.id === productoComprado.id);
 
   if (existingItem) {
     existingItem.cantidad += 1; 
   } else {
     carrito.items.push(productoComprado); // + nuevo producto al carrito
-  }
+  }*/
   // Actualizar el localStorage
-  localStorage.setItem("carrito", JSON.stringify(carrito)); 
+  let result = await getJSONData(CART_URL, "POST", productoComprado);
+  return result;
+  //localStorage.setItem("carrito", JSON.stringify(carrito)); 
 }
 
-function removeCarrito(productoComprado) {
+async function removeCarrito(productoComprado) {
+  /*
   let carrito = getCarrito();
   let existingItem = carrito.items.find(item => item.id === productoComprado.id);
 
@@ -79,6 +92,10 @@ function removeCarrito(productoComprado) {
   }
   // Actualizar el localStorage
   localStorage.setItem("carrito", JSON.stringify(carrito)); 
+  */
+  console.log("removeCarrito", productoComprado)
+  let result = await getJSONData(CART_URL+`/${productoComprado.id}`, "DELETE", productoComprado);
+  return result;
 }
 
 //borro carrito
@@ -114,10 +131,21 @@ let hideSpinner = function(){
   document.getElementById("spinner-wrapper").style.display = "none";
 }
 
-let getJSONData = function(url){
+let getJSONData = function(url, method="GET", body =""){
+    let header = {"Content-Type": "application/json",};
     let result = {};
     showSpinner();
-    return fetch(url)
+    //reviso si tengo token
+    let user = getUser();
+    if(user.token != ""){
+      header["access-token"] = user.token
+    }
+    console.log("getJsonData", header)
+    return fetch(url,{
+      method: method, // Especifica el método (GET, POST, PUT, DELETE, etc.)
+      body: body ? JSON.stringify(body) : null, // Convierte el body a JSON solo si no es vacío
+      headers: header
+    })
     .then(response => {
       if (response.ok) {
         return response.json();
@@ -193,15 +221,17 @@ window.onclick = function(event) {
 
 //Cambio de moneda
 async function cotizacionDolar(){
-  let cambio =  await getJSONData(COTIZACION_DOLAR_URL);
-  ADOLAR = cambio.data.compra;
-  APESO =  cambio.data.venta;
+  //let cambio =  await getJSONData(COTIZACION_DOLAR_URL);
+  //ADOLAR = cambio.data.compra;
+  //APESO =  cambio.data.venta;
+  APESO = 43;
+  ADOLAR = 0.023;
 };
 
 //Badge
-function badgeCarrito(){
+async function badgeCarrito(){
   let pCarrito = document.getElementById("badgeCarrito");
-  let carrito = getCarrito();
+  let carrito = await getCarrito();
   let cantidadCarrito = 0;
   carrito.items.forEach(element => {
     cantidadCarrito += element.cantidad;

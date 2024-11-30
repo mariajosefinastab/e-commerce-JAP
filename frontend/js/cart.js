@@ -85,24 +85,23 @@ function displayCarrito(carrito) {
 }
 
 // Sumar cantidad de productos
-function actualizarCarrito(idProducto, sumaresta){
+async function actualizarCarrito(idProducto, sumaresta){
     console.log("actualizarCarrito()", idProducto, sumaresta)
-    let carrito = getCarrito();
-    carrito.items.forEach(elemento => {
+    let carrito = await getCarrito();
+    carrito.items.forEach(async elemento => {
         if (elemento.id == idProducto) {
             if (sumaresta == "suma") {
-                addCarrito(elemento);
-                displayCarrito(getCarrito());
+                await addCarrito(elemento);
             }
             if (sumaresta == "resta") {
-                removeCarrito(elemento);
-                displayCarrito(getCarrito());
+                await removeCarrito(elemento);
             }
+            displayCarrito(await getCarrito());
         }
     });      
 }
 
-function medioPago(){
+async function medioPago(){
     console.log("medioPago().");
     let medio = document.getElementById("formaPago").value;
     let form = "";
@@ -133,7 +132,7 @@ function medioPago(){
     }
 
     document.getElementById("medioPago").innerHTML = form;
-    displayCheckout(carrito);
+    displayCheckout(await getCarrito());
 }
 
 function formaEnvio(){
